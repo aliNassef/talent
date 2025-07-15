@@ -51,6 +51,7 @@ class _LeaveHistoryListScreenState extends State<LeaveHistoryListScreen> {
   bool doneRefresh = false;
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
+  @override
   initState() {
     super.initState();
     toast = FToast();
@@ -121,6 +122,7 @@ class _LeaveHistoryListScreenState extends State<LeaveHistoryListScreen> {
     setState(() {});
   }
 
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
@@ -149,11 +151,11 @@ class _LeaveHistoryListScreenState extends State<LeaveHistoryListScreen> {
               onTap: () {
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) {
-                  return HomeScreen();
+                  return const HomeScreen();
                 }));
               },
-              child: Padding(
-                padding: const EdgeInsets.only(right: 10.0),
+              child: const Padding(
+                padding: EdgeInsets.only(right: 10.0),
                 child: Icon(
                   Icons.home,
                   size: 25,
@@ -171,8 +173,8 @@ class _LeaveHistoryListScreenState extends State<LeaveHistoryListScreen> {
                     });
                     refreshList();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 10.0),
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 10.0),
                     child: Icon(
                       Icons.refresh,
                       color: Colors.white,
@@ -322,7 +324,7 @@ class _LeaveHistoryListScreenState extends State<LeaveHistoryListScreen> {
                     child: CircularProgressIndicator(),
                   )),
         bottomNavigationBar: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             border: Border(
               top: BorderSide(
                 color: Colors.grey,
@@ -410,7 +412,7 @@ class LeaveRequestCard extends StatelessWidget {
                 Container(
                   width: 60, // Adjust width as needed
                   height: 20, // Adjust height as needed
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 97, 96, 96), // Darker grey for the month
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(8.0),
@@ -420,7 +422,7 @@ class LeaveRequestCard extends StatelessWidget {
                   child: Center(
                     child: Text(
                       month,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                         color: Colors.white, // Month text in white
@@ -433,7 +435,7 @@ class LeaveRequestCard extends StatelessWidget {
                   height: 30, // Adjust height as needed
                   decoration: BoxDecoration(
                     color: Colors.grey[200], // Lighter grey for the day
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(8.0),
                       bottomRight: Radius.circular(8.0),
                     ),
@@ -441,7 +443,7 @@ class LeaveRequestCard extends StatelessWidget {
                   child: Center(
                     child: Text(
                       day,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
@@ -450,25 +452,25 @@ class LeaveRequestCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     reason,
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Row(
                     children: [
                       Text(
                         leaveType,
-                        style: TextStyle(fontSize: 14,color: Colors.grey),
+                        style: const TextStyle(fontSize: 14,color: Colors.grey),
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: statusColor.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(8),
