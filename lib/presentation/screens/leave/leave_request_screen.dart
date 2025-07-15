@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -115,10 +116,16 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
 
     employee = await employeeDao.getSingleEmployeeById(userId!);
     leaveTypeList = await leaveTypeDao.getLeaveTypeList();
+    final seenNames = <int>{};
+leaveTypeList = leaveTypeList.where((item) => seenNames.add(item.leave_type_id!)).toList();
+    log('leaveTypeList---------$leaveTypeList');
     print('leaveTypeList---------$leaveTypeList');
-
+  
     leaveReasonList = await leaveReasonDao.getLeaveReasonList();
+  
     leaveRemainList = await leaveRemainDao.getLeaveRemainList();
+    log('leaveRemainList---------$leaveRemainList');
+    print('leaveRemainList---------$leaveRemainList');
 
     selectedDate = DateUtil().getDateFormat(_dateTime);
 
