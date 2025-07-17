@@ -19,8 +19,14 @@ const String navigationActionId = 'id_3';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  SharedPreferences prefs = await SharedPreferences.getInstance();
   sharePref = await SharedPreferences.getInstance();
   deviceIMEI = '111'; //await PlatformDeviceId.getDeviceId();
-  runApp(const Root());
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      path: 'assets/traanslations',
+      fallbackLocale: const Locale('en'),
+      child: const Root(),
+    ),
+  );
 }

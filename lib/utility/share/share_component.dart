@@ -1,22 +1,20 @@
 import 'dart:async';
-import 'dart:io';
+import 'dart:developer';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class ShareComponentClass {
-  InternetConnectionStatus? connection_status;
+  InternetConnectionStatus? connectionStatus;
   late DeviceInfoPlugin deviceInfoPlugin;
   late AndroidDeviceInfo androidDeviceInfo;
 
   Future<AndroidDeviceInfo> readDeviceId() async {
-    print('readDeviceId----------');
+    log('readDeviceId----------');
     deviceInfoPlugin = DeviceInfoPlugin();
     androidDeviceInfo = await deviceInfoPlugin.androidInfo;
-    print(
+    log(
       'androidDeviceInfo----------$androidDeviceInfo  : ${androidDeviceInfo.id}',
     );
-
-    // deviceIdentifier = androidDeviceInfo.androidId;
     return androidDeviceInfo;
   }
 }

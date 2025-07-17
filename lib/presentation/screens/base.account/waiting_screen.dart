@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -21,7 +22,7 @@ import 'package:talent/data/database/dao/payslip_dao.dart';
 import 'package:talent/data/database/dao/payslip_line_dao.dart';
 import 'package:talent/presentation/screens/dashboard/dashboard_main.dart';
 import 'package:progress_indicators/progress_indicators.dart';
-import 'package:talent/utility/style/theme.dart' as Style;
+import 'package:talent/utility/style/theme.dart' as style;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/api/expense_product_api.dart';
 import '../../../data/api/expense_tax_api.dart';
@@ -29,6 +30,7 @@ import '../../../data/api/leave_api.dart';
 import '../../../data/api/login_api.dart';
 import '../../../data/helper/constant.dart';
 import '../../../data/models/employee/employee.dart';
+import '../../../utility/share/app_strings.dart';
 import '../../../utility/share/share_component.dart';
 import '../../../utility/utils/size_config.dart';
 import '../../widgets/custom_event_dialog.dart';
@@ -40,10 +42,10 @@ class WaitingScreen extends StatefulWidget {
   const WaitingScreen({super.key});
 
   @override
-  _WaitingScreenState createState() => _WaitingScreenState();
+  WaitingScreenState createState() => WaitingScreenState();
 }
 
-class _WaitingScreenState extends State<WaitingScreen> {
+class WaitingScreenState extends State<WaitingScreen> {
   var employeeDao = EmployeeDao();
   var holidayDao = HolidayDao();
   var leaveTypeDao = LeaveTypeDao();
@@ -82,7 +84,7 @@ class _WaitingScreenState extends State<WaitingScreen> {
       ..lineWidth = 0.5
       ..indicatorSize = 45.0
       ..radius = 5.0
-      ..maskColor = Colors.grey.withOpacity(0.5)
+      ..maskColor = Colors.grey.withValues(alpha: 0.5)
       ..userInteractions = false
       ..backgroundColor = Colors.white
       ..loadingStyle = EasyLoadingStyle.light
@@ -103,14 +105,14 @@ class _WaitingScreenState extends State<WaitingScreen> {
 
     Employee employee = await employeeDao.getSingleEmployeeById(userId!);
     toast!.showToast(
-      child: Widgets().getDownloadToast('Employee data downloaded'),
+      child: Widgets().getDownloadToast(AppStrings.employeeDataDownloaded),
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 1),
     );
 
     await attendanceApi.getAttendanceList(employee.employee_id!);
     toast!.showToast(
-      child: Widgets().getDownloadToast('Attendance data downloaded'),
+      child: Widgets().getDownloadToast(AppStrings.attendanceDataDownloaded),
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 1),
     );
@@ -136,7 +138,7 @@ class _WaitingScreenState extends State<WaitingScreen> {
 
     await expenseTaxApi.getExpenseTaxListOnline();
     toast!.showToast(
-      child: Widgets().getDownloadToast('Expense data downloaded'),
+      child: Widgets().getDownloadToast(AppStrings.expenseDataDownloaded),
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 1),
     );
@@ -146,45 +148,14 @@ class _WaitingScreenState extends State<WaitingScreen> {
     await leaveApi.getLeaveTypeList();
     // await leaveApi.getUpcomingHolidayList();
     toast!.showToast(
-      child: Widgets().getDownloadToast('Leave data downloaded'),
+      child: Widgets().getDownloadToast(AppStrings.leaveDataDownloaded),
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 1),
     );
-
-    // await goalApi.getGoalList();
-    // await goalApi.getGoalDetail('Q1');
-    // await goalApi.getGoalDetail('Q2');
-    // await goalApi.getGoalDetail('Q3');
-    // await goalApi.getGoalDetail('Q4');
-
-    // await goalApi.getGoalUndoneList();
-
-    // toast!.showToast(
-    //   child: Widgets().getDownloadToast('Goal data downloaded'),
-    //   gravity: ToastGravity.BOTTOM,
-    //   toastDuration: Duration(seconds: 1),
-    // );
-
-    // await instructionApi.getInstructionList(employee.employee_id!);
-    // toast!.showToast(
-    //   child: Widgets().getDownloadToast('Instruction data downloaded'),
-    //   gravity: ToastGravity.BOTTOM,
-    //   toastDuration: Duration(seconds: 1),
-    // );
-
-    // await travelAllowanceApi.getTravelAllowanceList(
-    //     employee.employee_id!, 'self');
-    // toast!.showToast(
-    //   child: Widgets().getDownloadToast('Travel Allowance data downloaded'),
-    //   gravity: ToastGravity.BOTTOM,
-    //   toastDuration: Duration(seconds: 1),
-    // );
-
-    // // if (!mounted) return;
     var paySlipApi = PaySlipAPI();
     await paySlipApi.paySlipList();
     toast!.showToast(
-      child: Widgets().getDownloadToast('Payslip data downloaded'),
+      child: Widgets().getDownloadToast(AppStrings.payslipDataDownloaded),
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 1),
     );
@@ -219,7 +190,7 @@ class _WaitingScreenState extends State<WaitingScreen> {
 
     deviceState = await loginApi.checkDevice(deviceStatus.id);
 
-    print('deviceState--------$deviceState');
+    log('deviceState--------$deviceState');
     if (deviceState == 'waiting') {
       await pref.setString('waitingStage', 'true');
     } else if (deviceState == 'approve') {
@@ -245,7 +216,7 @@ class _WaitingScreenState extends State<WaitingScreen> {
       );
     } else if (deviceState == 'Invalid cookie.') {
       toast!.showToast(
-        child: Widgets().getErrorToast('Session Expired.Please login again.'),
+        child: Widgets().getErrorToast(AppStrings.sessionExpiredPleaseLoginAgain),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 3),
       );
@@ -256,7 +227,7 @@ class _WaitingScreenState extends State<WaitingScreen> {
       Navigator.of(_scaffoldCtx).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return LoginScreen();
+            return const LoginScreen();
           },
         ),
         (route) => false,
@@ -288,9 +259,9 @@ class _WaitingScreenState extends State<WaitingScreen> {
               ),
             ),
             const SizedBox(height: 10),
-            const Text(
-              'Approval Or Download',
-              style: TextStyle(
+            Text(
+              AppStrings.approvalOrDownload,
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
@@ -299,7 +270,7 @@ class _WaitingScreenState extends State<WaitingScreen> {
             JumpingDotsProgressIndicator(
               numberOfDots: 5,
               fontSize: 200,
-              color: Style.ColorObj.mainColor,
+              color: style.ColorObj.mainColor,
             ),
           ],
         ),

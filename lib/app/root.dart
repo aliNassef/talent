@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,9 +28,9 @@ class Root extends StatelessWidget {
     return MaterialApp(
       title: "Talent HR",
       builder: EasyLoading.init(),
-      // supportedLocales: context.supportedLocales,
-      // localizationsDelegates: context.localizationDelegates,
-      // locale: context.locale,
+      supportedLocales: context.supportedLocales,
+      localizationsDelegates: context.localizationDelegates,
+      locale: context.locale,
       initialRoute: '/',
       routes: {
         '/': (context) => const WelcomeScreen(),

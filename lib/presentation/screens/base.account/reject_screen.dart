@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../utility/utils/size_config.dart';
 
 class RejectScreen extends StatefulWidget {
+  const RejectScreen({super.key});
+
   _RejectScreenState createState() => _RejectScreenState();
 }
 

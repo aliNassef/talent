@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -9,7 +10,8 @@ import 'package:talent/presentation/screens/base.account/reject_screen.dart';
 import 'package:talent/presentation/screens/base.account/waiting_screen.dart';
 import 'package:talent/presentation/screens/dashboard/dashboard_main.dart';
 import 'package:progress_indicators/progress_indicators.dart';
-import 'package:talent/utility/style/theme.dart' as Style;
+import 'package:talent/utility/share/app_strings.dart';
+import 'package:talent/utility/style/theme.dart' as style;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/api/login_api.dart';
 import '../../../data/helper/constant.dart';
@@ -32,15 +34,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Timer? timer;
   var deviceState = '';
   var loginApi = loginAPI();
-  var pref;
+  late SharedPreferences pref;
   FToast? toast;
   StreamSubscription? subscription;
   bool hasConnection = true;
+  // ignore: prefer_typing_uninitialized_variables
   var waitingStage;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     toast = FToast();
     toast!.init(context);
@@ -51,7 +53,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       ..lineWidth = 0.5
       ..indicatorSize = 45.0
       ..radius = 5.0
-      ..maskColor = Colors.grey.withOpacity(0.5)
+      ..maskColor = Colors.grey.withValues(alpha: 0.5)
       ..userInteractions = false
       ..backgroundColor = Colors.white
       ..loadingStyle = EasyLoadingStyle.light
@@ -59,6 +61,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       ..indicatorColor = Colors.black
       ..dismissOnTap = false;
     loadData();
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    subscription?.cancel();
+    super.dispose();
   }
 
   loadData() async {
@@ -71,27 +80,27 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       List<ConnectivityResult> result,
     ) async {
       // Got a new connectivity status!
-      print('connection------$result');
+      log('connection------$result');
       if (result.contains(ConnectivityResult.none)) {
         pref.setString('noInternet', 'true');
         toast!.showToast(
           child: Widgets().noInternetToast(MessageAndAlertText.noInternet),
           gravity: ToastGravity.BOTTOM,
-          toastDuration: Duration(seconds: 3),
+          toastDuration: const Duration(seconds: 3),
         );
         hasConnection = false;
       } else {
-        print('else-------');
+        log('else-------');
         var noInternet = pref.getString('noInternet');
-        print('noInternet--------$noInternet');
+        log('noInternet--------$noInternet');
 
         if (noInternet == 'true') {
           toast!.showToast(
             child: Widgets().onlineToast(MessageAndAlertText.internetRestore),
             gravity: ToastGravity.BOTTOM,
-            toastDuration: Duration(seconds: 3),
+            toastDuration: const Duration(seconds: 3),
           );
-          var isWelcomePage = await pref.getBool('welcomePage');
+          var isWelcomePage = pref.getBool('welcomePage');
           if (isWelcomePage == true) await gotoNext();
         }
 
@@ -103,9 +112,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   gotoNext() async {
-    print('gotoNext-----------');
+    log('gotoNext-----------');
     bool checkInternet = await InternetConnectionChecker.instance.hasConnection;
-    print('checkInternet--------$checkInternet');
+    log('checkInternet--------$checkInternet');
     if (checkInternet == false) {
       if (!mounted) return;
       showDialog(context: context, builder: (_) => CustomEventDialog());
@@ -113,25 +122,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     }
 
     timer = Timer(const Duration(milliseconds: 1), () async {
-      String? token = await pref.getString('jwt_token');
+      String? token = pref.getString('jwt_token');
 
-      waitingStage = await pref.getString('waitingStage');
-      print('waitingStage-----$waitingStage');
+      waitingStage = pref.getString('waitingStage');
+      log('waitingStage-----$waitingStage');
 
       if (waitingStage == null || waitingStage == '') {
-        print('waitingStage 1');
+        log('waitingStage 1');
         await pref.setString('waitingStage', 'false');
       }
 
       if (token.toString() != "null" && token != null) {
-        print('waitingStage 2');
+        log('waitingStage 2');
         if (waitingStage == 'true') {
           dispose();
           if (!mounted) return;
           Navigator.of(_scaffoldCtx).pushAndRemoveUntil(
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return WaitingScreen();
+                return const WaitingScreen();
               },
             ),
             (route) => false,
@@ -149,7 +158,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         Navigator.of(_scaffoldCtx).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (BuildContext context) {
-              return LoginScreen();
+              return const LoginScreen();
             },
           ),
           (route) => false,
@@ -162,28 +171,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     ); //for internet restore and checkactivation
   }
 
-  // void dispose() {
-  //   timer!.cancel();
-  //   super.dispose();
-
-  // }
-
-  
-  //   void dispose() {
-  //    timer?.cancel();
-  //   super.dispose();
-
-  // }
-
   Future<void> checkDeviceActivation() async {
-    // DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-    // AndroidDeviceInfo androidDeviceInfo = await deviceInfoPlugin.androidInfo;
-
     var shareComponent = ShareComponentClass();
     var deviceStatus = await shareComponent.readDeviceId();
 
     deviceState = await loginApi.checkDevice(deviceStatus.id);
-    print('deviceState--------$deviceState');
+    log('deviceState--------$deviceState');
     if (deviceState == 'waiting') {
       await pref.setString('waitingStage', 'true');
     } else if (deviceState == 'approve') {
@@ -194,7 +187,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return HomeScreen();
+            return const HomeScreen();
           },
         ),
       );
@@ -209,18 +202,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       );
     } else if (deviceState == 'Invalid cookie.') {
       toast!.showToast(
-        child: Widgets().getErrorToast('Session Expired.Please login again.'),
+        child: Widgets().getErrorToast(
+          AppStrings.sessionExpiredPleaseLoginAgain,
+        ),
         gravity: ToastGravity.BOTTOM,
-        toastDuration: Duration(seconds: 3),
+        toastDuration: const Duration(seconds: 3),
       );
       await pref.setString('jwt_token', "null");
-      await Future.delayed(Duration(seconds: 4));
-      // timer = Timer.periodic(Duration(seconds: 3), (timer) {
+      await Future.delayed(const Duration(seconds: 4));
       if (!mounted) return;
       Navigator.of(_scaffoldCtx).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return LoginScreen();
+            return const LoginScreen();
           },
         ),
         (route) => false,
@@ -229,7 +223,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       toast!.showToast(
         child: Widgets().getErrorToast(deviceState),
         gravity: ToastGravity.BOTTOM,
-        toastDuration: Duration(seconds: 3),
+        toastDuration: const Duration(seconds: 3),
       );
     }
   }
@@ -239,16 +233,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     SizeConfig().init(context);
     _scaffoldCtx = context;
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
-                child: Image(
+                child: const Image(
                   width: 70,
                   height: 70,
                   image: AssetImage('assets/logos/ic_hrms.png'),
@@ -257,7 +251,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               JumpingDotsProgressIndicator(
                 numberOfDots: 5,
                 fontSize: 150,
-                color: Style.ColorObj.mainColor,
+                color: style.ColorObj.mainColor,
               ),
             ],
           ),

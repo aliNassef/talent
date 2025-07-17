@@ -105,6 +105,7 @@ flutter:
   assets:
     - assets/imgs/
     - assets/logos/
+    - assets/traanslations/
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
