@@ -19,16 +19,16 @@ class loginAPI {
     String deviceModel,
   ) async {
     pref = await SharedPreferences.getInstance();
-    var urlLink = 'https://sanidstg.odoo.com/api/auth';
-    database = 'odoozaly-sanid-stg-21897440';
+    var urlLink = 'https://sanidsa.odoo.com/api/auth';
+    database = 'odoozaly-sanid-main-19183474';
     String? loginResult;
 
-    var url1 = Uri.parse('https://sanidstg.odoo.com/api/auth');
+    var url1 = Uri.parse('https://sanidsa.odoo.com/api/auth');
 
     final body = {
       'username': username,
       'password': password,
-      'device_imei': "14122221",
+      'device_imei': deviceImei,
       'device_vals': json.encode({
         'device_id': deviceId,
         'name': deviceName,
@@ -39,7 +39,7 @@ class loginAPI {
     log('loginAPI URL: $url1');
     log(
       'loginAPI: $username, $password, $deviceId, $deviceImei, $deviceName, $deviceModel',
-    );
+    ); 
     try {
       final response = await http.post(
         url1,

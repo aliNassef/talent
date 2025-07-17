@@ -21,7 +21,7 @@ class EmployeeAPI {
     pref = await SharedPreferences.getInstance();
     urlLink = await pref.getString('url');
     header_cookie = await pref.getString('header_cookie');
-    const database1 = 'odoozaly-sanid-stg-21897440';
+    const database1 = 'odoozaly-sanid-main-19183474';
     uid = await pref.getInt('uid');
     var insertResult;
     List<Map<String, dynamic>> listData = [];
@@ -46,7 +46,7 @@ class EmployeeAPI {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'cookie': header_cookie,
-            'db': 'odoozaly-sanid-stg-21897440',
+            'db': 'odoozaly-sanid-main-19183474',
           },
           body: json.encode(param),
         )

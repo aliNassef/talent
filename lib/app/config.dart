@@ -1,8 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Config {
-  static const url = 'https://sanidstg.odoo.com/';
-  static const database = 'odoozaly-sanid-stg-21897440'; //internal_hr_uat_
+  static const url = 'https://sanidsa.odoo.com/';
+  static const database = 'odoozaly-sanid-main-19183474'; //internal_hr_uat_
 
   static loadConfigInfo() async {
     print('loadConfigInfo---------');

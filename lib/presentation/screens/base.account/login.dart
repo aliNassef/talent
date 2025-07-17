@@ -483,11 +483,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               // url = urlController.text.toString();
                               await pref.setString(
                                 'database',
-                                'odoozaly-sanid-stg-21897440',
+                                'odoozaly-sanid-main-19183474',
                               );
                               await pref.setString(
                                 'url',
-                                'https://sanidstg.odoo.com/',
+                                'https://sanidsa.odoo.com/',
                               );
                               // //showDatabaseDropdown = true;
 

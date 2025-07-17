@@ -681,10 +681,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     "Monday June 10 - 2022, 07:56 AM",
                     style: TextStyle(fontSize: 14),
                   ),
-                  // Text(
-                  //   "07:40:56 AM",
-                  //   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                  // ),
                   ValueListenableBuilder(
                     valueListenable: _timeNotifier,
                     builder: (_, value, __) => RichText(

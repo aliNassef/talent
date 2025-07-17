@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +10,6 @@ import '../presentation/screens/base.account/login.dart';
 import '../presentation/screens/dashboard/dashboard_main.dart';
 import '../presentation/screens/expense/expense_request_history_list_page.dart';
 import '../presentation/screens/leave/leave_dashboard.dart';
-import '../presentation/screens/payslip/pay_slip.dart';
 import '../presentation/screens/payslip/pay_slip_list_page.dart';
 
 class Root extends StatelessWidget {
@@ -20,7 +17,7 @@ class Root extends StatelessWidget {
   void data() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     final String? url = pref.getString('url');
-    
+
     log("url :$url");
   }
 
