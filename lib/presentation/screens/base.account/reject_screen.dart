@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:talent/utility/share/app_strings.dart';
 
 import '../../../utility/utils/size_config.dart';
 
 class RejectScreen extends StatefulWidget {
   const RejectScreen({super.key});
 
-  _RejectScreenState createState() => _RejectScreenState();
+  @override
+  State<RejectScreen> createState() => _RejectScreenState();
 }
 
 class _RejectScreenState extends State<RejectScreen> {
+  @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
@@ -16,42 +19,42 @@ class _RejectScreenState extends State<RejectScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width,
-              child: Image(
+              child: const Image(
                 width: 250,
                 height: 250,
                 color: Colors.red,
                 image: AssetImage('assets/logos/ic_device.png'),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Text(
-              'Access Denied!',
-              style: TextStyle(
+              AppStrings.accessDenied,
+              style: const TextStyle(
                 color: Colors.red,
                 fontSize: 40,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
-              'You don\'t have access',
-              style: TextStyle(
+              AppStrings.youDontHaveAccess,
+              style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 18,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Text(
-              'Please contact',
-              style: TextStyle(color: Colors.grey, fontSize: 18),
+              AppStrings.youDontHaveAccess,
+              style: const TextStyle(color: Colors.grey, fontSize: 18),
             ),
           ],
         ),

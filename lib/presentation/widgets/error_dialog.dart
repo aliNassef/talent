@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../utility/style/theme.dart';
 
 
+// ignore: must_be_immutable
 class ErrorDialog extends StatelessWidget {
   String title;
   Widget content;

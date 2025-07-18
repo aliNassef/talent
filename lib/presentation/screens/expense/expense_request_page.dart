@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
@@ -11,6 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:talent/utility/share/app_strings.dart';
 import 'package:talent/utility/utils/extension.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/api/expense_api.dart';
@@ -30,6 +31,8 @@ import '../base.account/login.dart';
 import 'expense_request_history_list_page.dart';
 
 class ExpenseEntryPage extends StatefulWidget {
+  const ExpenseEntryPage({super.key});
+
   @override
   State<ExpenseEntryPage> createState() => _ExpenseEntryPageState();
 }
@@ -41,7 +44,9 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
   var totalAmountController = TextEditingController();
   var descController = TextEditingController();
   var noteController = TextEditingController();
+  // ignore: prefer_typing_uninitialized_variables
   var pref;
+  // ignore: prefer_typing_uninitialized_variables
   var employeeName;
   List<ExpenseProduct> expenseProductList = [];
   List<AnalyticAccount> analyticAccountList = [];
@@ -57,19 +62,25 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
   String base64Image = '';
+  // ignore: prefer_typing_uninitialized_variables
   var mode;
   bool updateDenied = false;
   // var expenseDao = ExpenseDao();
   FToast? toast;
+  // ignore: prefer_typing_uninitialized_variables
   var paidBy;
+  // ignore: prefer_typing_uninitialized_variables
   var insertResult;
   bool makeChanges = false;
   var expenseApi = ExpenseAPI();
   NumberFormat numberFormat = NumberFormat("#,###", "en_US");
   double total = 0;
   var expenseProductDao = ExpenseProductDao();
+  // ignore: prefer_typing_uninitialized_variables
   var expenseTypeId;
+  // ignore: prefer_typing_uninitialized_variables
   var analyticAccountId;
+  // ignore: prefer_typing_uninitialized_variables
   var expenseTaxId;
   ExpenseProduct? selectedExpense;
   AnalyticAccount? selectedAnalyticAccount;
@@ -83,7 +94,6 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     toast = FToast();
     toast!.init(context);
@@ -110,83 +120,67 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
   }
 
   List<DropdownMenuItem<int>> _addDividersAfterItems(
-      List<ExpenseProduct> items) {
-    List<DropdownMenuItem<int>> _menuItems = [];
+    List<ExpenseProduct> items,
+  ) {
+    List<DropdownMenuItem<int>> menuItems = [];
     for (var item in items) {
-      _menuItems.addAll(
-        [
-          DropdownMenuItem<int>(
-            value: item.expenseProductId!,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3.0),
-              child: Text(
-                item.name!,
-                style: normalMediumBalckText,
-              ),
-            ),
+      menuItems.addAll([
+        DropdownMenuItem<int>(
+          value: item.expenseProductId!,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 3.0),
+            child: Text(item.name!, style: normalMediumBalckText),
           ),
-          if (item != items.last)
-            DropdownMenuItem<int>(
-              enabled: false,
-              child: Container(
-                height: 1,
-                color: Colors.black12,
-              ),
-            ),
-        ],
-      );
+        ),
+        if (item != items.last)
+          DropdownMenuItem<int>(
+            enabled: false,
+            child: Container(height: 1, color: Colors.black12),
+          ),
+      ]);
     }
 
-    return _menuItems;
+    return menuItems;
   }
 
   List<DropdownMenuItem<int>> _addDividersAfterItemsForAnalyticAccount(
-      List<ExpenseTax> items) {
-    List<DropdownMenuItem<int>> _menuItems = [];
+    List<ExpenseTax> items,
+  ) {
+    List<DropdownMenuItem<int>> menuItems = [];
     for (var item in items) {
-      _menuItems.addAll(
-        [
-          DropdownMenuItem<int>(
-            value: item.expenseTaxId!,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3.0),
-              child: Text(
-                item.name!,
-                style: normalMediumBalckText,
-              ),
-            ),
+      menuItems.addAll([
+        DropdownMenuItem<int>(
+          value: item.expenseTaxId!,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 3.0),
+            child: Text(item.name!, style: normalMediumBalckText),
           ),
-          if (item != items.last)
-            DropdownMenuItem<int>(
-              enabled: false,
-              child: Container(
-                height: 1,
-                color: Colors.black12,
-              ),
-            ),
-        ],
-      );
+        ),
+        if (item != items.last)
+          DropdownMenuItem<int>(
+            enabled: false,
+            child: Container(height: 1, color: Colors.black12),
+          ),
+      ]);
     }
 
-    return _menuItems;
+    return menuItems;
   }
 
   void _openFileExplorer() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['jpg', 'pdf', 'doc'],
-        allowMultiple: true);
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'pdf', 'doc'],
+      allowMultiple: true,
+    );
     if (result != null) {
       setState(() {
-        /*For(int i=0;i<result.length;i++) {
-
-        }*/
         File file = File((result.files.single.path).toString());
         path = file.path;
         final bytes = File(file.path).readAsBytesSync();
 
         base64Image = base64Encode(bytes);
-        print(path);
+        log(path);
       });
     } else {
       path = "";
@@ -195,805 +189,594 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    MediaQuery.of(context).size;
     _scaffoldCtx = context;
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) {
-          return ExpenseListPage();
-        }));
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return const ExpenseListPage();
+            },
+          ),
+        );
         return false;
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'new_expense'.tr(),
-            style: appBarTitleStyle,
-          ),
+          title: Text(AppStrings.newExpense, style: appBarTitleStyle),
           backgroundColor: ColorObj.mainColor,
           leading: InkWell(
-              onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
-                  return ExpenseListPage();
-                }));
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(right: 10.0),
-                child: Icon(
-                  Icons.arrow_back,
-                  size: 28,
-                  color: Colors.white,
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const ExpenseListPage();
+                  },
                 ),
-              )),
+              );
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(right: 10.0),
+              child: Icon(Icons.arrow_back, size: 28, color: Colors.white),
+            ),
+          ),
         ),
         body: GestureDetector(
-            onTap: () {
-              FocusScope.of(context).requestFocus(new FocusNode());
-            },
-            child: SingleChildScrollView(
-                child: Container(
-                    color: Colors.white,
-                    child: Padding(
-                        padding: EdgeInsets.all(12),
-                        child: Container(
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                    Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      selectedDate,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontFamily: 'Regular',
-                                          color: Color(0xff006ea5),
-                                          fontSize: 16),
-                                    )
-                                  ],
-                                ),
-                              // Container(
-                              //     width: MediaQuery.of(context).size.width,
-                              //     height: 60,
-                              //     child: Card(
-                              //         child: ElevatedButton(
-                              //       style: ButtonStyle(
-                              //           backgroundColor:
-                              //               MaterialStateProperty.all(
-                              //                   Color(0xfff0efef)),
-                              //           shape: MaterialStateProperty.all(
-                              //               const RoundedRectangleBorder(
-                              //                   borderRadius: BorderRadius.all(
-                              //                       Radius.circular(5))))),
-                              //       child: Text(
-                              //         selectedDate,
-                              //         textAlign: TextAlign.center,
-                              //         style: TextStyle(
-                              //             fontFamily: 'Regular',
-                              //             color: Color(0xff006ea5),
-                              //             fontSize: 20),
-                              //       ),
-                              //       onPressed: () {
-                              //         showDatePicker(
-                              //                 context: context,
-                              //                 initialDate: DateTime.now(),
-                              //                 firstDate: DateTime(2001),
-                              //                 lastDate: DateTime(2222))
-                              //             .then((value) {
-                              //           setState(() {
-                              //             if (value != null) {
-                              //               selectedDate =
-                              //                   DateUtil().getDateFormat(value);
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: SingleChildScrollView(
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          selectedDate,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontFamily: 'Regular',
+                            color: Color(0xff006ea5),
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
 
-                              //               selectedFormatDate =
-                              //                   DateUtil().getChosenDate(value);
-
-                              //               dateTime = value;
-                              //             }
-                              //           });
-                              //         });
-                              //       },
-                              //     ))),
-                             
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: 2.0.wp(context),
-                                    vertical: 2.0.hp(context)),
-                                decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8)),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          offset: Offset(4, 4),
-                                          blurRadius: 3,
-                                          spreadRadius: 1,
-                                          color: Colors.black12),
-                                      BoxShadow(
-                                          offset: Offset(-2, -2),
-                                          blurRadius: 2,
-                                          spreadRadius: 1,
-                                          color: Colors.black12)
-                                    ]),
-                                child: Padding(
-                                  padding: EdgeInsets.all(5.0.wp(context)),
+                    const SizedBox(height: 8),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 2.0.wp(context),
+                        vertical: 2.0.hp(context),
+                      ),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(4, 4),
+                            blurRadius: 3,
+                            spreadRadius: 1,
+                            color: Colors.black12,
+                          ),
+                          BoxShadow(
+                            offset: Offset(-2, -2),
+                            blurRadius: 2,
+                            spreadRadius: 1,
+                            color: Colors.black12,
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(5.0.wp(context)),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
                                   child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                              flex: 1,
-                                              child: Container(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Description',
-                                                      style:
-                                                          normalTextWithGrey700,
-                                                    ),
-                                                    SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    Container(
-                                                      height: 40,
-                                                      width: double.infinity,
-                                                      //  margin: EdgeInsets.only(right: 20),
-                                                      padding: EdgeInsets.only(
-                                                          left: 10,
-                                                          right: 10,
-                                                          bottom: 8),
-                                                      decoration: BoxDecoration(
-                                                        // color: Color(0xffF5F5F5),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        border: Border.all(
-                                                            color: ColorObj
-                                                                .dropDownBorderColor),
-                                                      ),
-                                                      child: TextFormField(
-                                                          controller:
-                                                              descController,
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          cursorColor:
-                                                              Colors.grey,
-                                                          style:
-                                                              normalTextWithBlack,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            // hintText:
-                                                            //     'Enter............',
-                                                            hintStyle:
-                                                                smallTextWithGrey700,
-                                                            border: InputBorder
-                                                                .none,
-                                                          ),
-                                                          onChanged:
-                                                              ((value) async {
-                                                            setState(() {});
-                                                          })),
-                                                    )
-                                                  ],
-                                                ),
-                                              )),
-                                        ],
+                                      Text(
+                                        AppStrings.description,
+                                        style: normalTextWithGrey700,
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Divider(),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Container(
-                                              child: Text(
-                                                'Expense Product',
-                                                style: normalMediumGreyText,
-                                              ),
-                                            ),
-                                            Container(
-                                                height: 40,
-                                                margin: EdgeInsets.only(
-                                                  top: 8,
-                                                ),
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 6),
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(6)),
-                                                    border: Border.all(
-                                                        color: ColorObj
-                                                            .dropDownBorderColor)),
-                                                child:
-                                                    DropdownButtonHideUnderline(
-                                                  child: DropdownButton2(
-                                                    dropdownFullScreen: true,
-                                                    dropdownDecoration:
-                                                        const BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            5))),
-                                                    isExpanded: true,
-                                                    hint: Text(
-                                                      'Select Expense Product',
-                                                      style:
-                                                          normalMediumGreyText,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                    items:
-                                                        _addDividersAfterItems(
-                                                            expenseProductList),
-                                                    itemHeight: 20,
-                                                    value: expenseTypeId,
-                                                    onChanged: (value) async {
-                                                      expenseTypeId =
-                                                          value as int;
-
-                                                      expenseProductList
-                                                          .forEach((element) {
-                                                        if (expenseTypeId ==
-                                                            element
-                                                                .expenseProductId) {
-                                                          selectedExpense =
-                                                              element;
-                                                        }
-                                                      });
-
-                                                      setState(() {});
-                                                    },
-                                                  ),
-                                                ))
-                                          ]),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Divider(),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Container(
-                                              child: Text(
-                                                'Expense Tax',
-                                                style: normalMediumGreyText,
-                                              ),
-                                            ),
-                                            Container(
-                                                height: 40,
-                                                margin: EdgeInsets.only(
-                                                  top: 8,
-                                                ),
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 6),
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(6)),
-                                                    border: Border.all(
-                                                        color: ColorObj
-                                                            .dropDownBorderColor)),
-                                                child:
-                                                    DropdownButtonHideUnderline(
-                                                  child: DropdownButton2(
-                                                    dropdownFullScreen: true,
-                                                    dropdownDecoration:
-                                                        const BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            5))),
-                                                    isExpanded: true,
-                                                    hint: Text(
-                                                      'Select Expense Tax',
-                                                      style:
-                                                          normalMediumGreyText,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                    items:
-                                                        _addDividersAfterItemsForAnalyticAccount(
-                                                            expenseTaxList),
-                                                    itemHeight: 20,
-                                                    value: expenseTaxId,
-                                                    onChanged: (value) async {
-                                                      expenseTaxId =
-                                                          value as int;
-
-                                                      expenseTaxList
-                                                          .forEach((element) {
-                                                        if (expenseTaxId ==
-                                                            element
-                                                                .expenseTaxId) {
-                                                          selectedExpenseTax =
-                                                              element;
-                                                        }
-                                                      });
-
-                                                      setState(() {});
-                                                    },
-                                                  ),
-                                                ))
-                                          ]),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Divider(),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                              flex: 1,
-                                              child: Container(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Bill Reference',
-                                                      style:
-                                                          normalMediumGreyText,
-                                                    ),
-                                                    SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    Container(
-                                                      height: 40,
-                                                      width: double.infinity,
-                                                      // margin: EdgeInsets.only(
-                                                      //     right: 12),
-                                                      padding: EdgeInsets.only(
-                                                          left: 10,
-                                                          right: 10,
-                                                          bottom: 8),
-                                                      decoration: BoxDecoration(
-                                                        //  color: Color(0xffF5F5F5),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        border: Border.all(
-                                                            color: ColorObj
-                                                                .dropDownBorderColor),
-                                                      ),
-                                                      child: TextFormField(
-                                                        controller:
-                                                            billRefController,
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        cursorColor:
-                                                            Colors.grey,
-                                                        style:
-                                                            normalTextWithBlack,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          border:
-                                                              InputBorder.none,
-                                                          // hintText:
-                                                          //     'Enter............',
-                                                          hintStyle:
-                                                              smallTextWithGrey700,
-                                                        ),
-                                                        onChanged:
-                                                            ((value) async {
-                                                          setState(() {});
-                                                        }),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              )),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Divider(),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                              flex: 1,
-                                              child: Container(
-                                                // margin: EdgeInsets.only(
-                                                //   left: 12,
-                                                // ),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Total(Ks)',
-                                                      style:
-                                                          normalMediumGreyText,
-                                                    ),
-                                                    SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    Container(
-                                                      height: 40,
-                                                      width: double.infinity,
-                                                      // margin: EdgeInsets.only(left: 20),
-                                                      padding: EdgeInsets.only(
-                                                          left: 10,
-                                                          right: 10,
-                                                          bottom: 8),
-                                                      decoration: BoxDecoration(
-                                                        //  color: Color(0xffF5F5F5),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        border: Border.all(
-                                                            color: ColorObj
-                                                                .dropDownBorderColor),
-                                                      ),
-                                                      child: TextFormField(
-                                                        controller:
-                                                            totalAmountController,
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        cursorColor:
-                                                            Colors.grey,
-                                                        style:
-                                                            normalTextWithBlack,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          // hintText:
-                                                          //     'Enter Amount...........',
-                                                          hintStyle:
-                                                              smallTextWithGrey700,
-                                                          border:
-                                                              InputBorder.none,
-                                                        ),
-                                                        onFieldSubmitted:
-                                                            (value) async {
-                                                          total = double.parse(
-                                                              value.toString());
-                                                          totalAmountController
-                                                                  .text =
-                                                              numberFormat
-                                                                  .format(
-                                                                      total);
-                                                        },
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              )),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Divider(),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 3,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: Container(
-                                                    margin: EdgeInsets.only(
-                                                        top: 16),
-                                                    child: Text(
-                                                      'Paid By:',
-                                                      style:
-                                                          normalMediumGreyText,
-                                                      textAlign: TextAlign.left,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 6,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      RadioListTile(
-                                                        contentPadding:
-                                                            EdgeInsets.all(0),
-                                                        dense: true,
-                                                        value: 0,
-                                                        groupValue: _groupValue,
-                                                        title: Text(
-                                                          "Employee(To reimburse)",
-                                                          style: TextStyle(
-                                                              fontSize: 14),
-                                                        ),
-                                                        onChanged: (newValue) {
-                                                          setState(() {
-                                                            _groupValue = int
-                                                                .parse(newValue
-                                                                    .toString());
-                                                            empSelect = true;
-                                                            companySelect =
-                                                                false;
-                                                            paidBy =
-                                                                'own_account';
-                                                          });
-                                                        },
-                                                        activeColor:
-                                                            _groupValue == 0
-                                                                ? Colors
-                                                                    .lightBlue[900]
-                                                                : Colors.black,
-                                                        selected: empSelect,
-                                                      ),
-                                                      RadioListTile(
-                                                        contentPadding:
-                                                            EdgeInsets.all(0),
-                                                        dense: true,
-                                                        value: 1,
-                                                        groupValue: _groupValue,
-                                                        title: Text("Company",
-                                                            style: TextStyle(
-                                                                fontSize: 14)),
-                                                        onChanged: (newValue) {
-                                                          print(
-                                                              'onChanged---$newValue');
-                                                          setState(() {
-                                                            _groupValue = int
-                                                                .parse(newValue
-                                                                    .toString());
-
-                                                            companySelect =
-                                                                true;
-                                                            empSelect = false;
-                                                            paidBy =
-                                                                'company_account';
-                                                          });
-                                                        },
-                                                        activeColor:
-                                                            _groupValue == 1
-                                                                ? Colors
-                                                                    .lightBlue[900]
-                                                                : Colors.black,
-                                                        selected: companySelect,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
-                                            ),
+                                      const SizedBox(height: 8),
+                                      Container(
+                                        height: 40,
+                                        width: double.infinity,
+                                        //  margin: EdgeInsets.only(right: 20),
+                                        padding: const EdgeInsets.only(
+                                          left: 10,
+                                          right: 10,
+                                          bottom: 8,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          // color: Color(0xffF5F5F5),
+                                          borderRadius: BorderRadius.circular(
+                                            5,
                                           ),
-                                          //Expanded(child: Container())
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Divider(),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                              flex: 1,
-                                              child: Container(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Note',
-                                                      style:
-                                                          normalMediumGreyText,
-                                                    ),
-                                                    SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    Container(
-                                                      // height: 40,
-                                                      width: double.infinity,
-                                                      //  margin: EdgeInsets.only(right: 20),
-                                                      padding: EdgeInsets.only(
-                                                          left: 10,
-                                                          right: 10,
-                                                          bottom: 8),
-                                                      decoration: BoxDecoration(
-                                                        // color: Color(0xffF5F5F5),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        border: Border.all(
-                                                            color: ColorObj
-                                                                .dropDownBorderColor),
-                                                      ),
-                                                      child: TextFormField(
-                                                          controller:
-                                                              noteController,
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          cursorColor:
-                                                              Colors.grey,
-                                                          style:
-                                                              normalTextWithBlack,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            // hintText:
-                                                            //     '............',
-                                                            hintStyle:
-                                                                smallTextWithGrey700,
-                                                            border: InputBorder
-                                                                .none,
-                                                          ),
-                                                          maxLines: 5,
-                                                          onChanged:
-                                                              ((value) async {
-                                                            setState(() {});
-                                                          })),
-                                                    )
-                                                  ],
-                                                ),
-                                              )),
-                                        ],
-                                      ),
-
-                                      // Row(
-                                      //   mainAxisAlignment:
-                                      //       MainAxisAlignment.start,
-                                      //   children: [
-                                      //     Container(
-                                      //       margin: EdgeInsets.only(top: 22),
-                                      //       child: Text(
-                                      //         'Add Photo',
-                                      //         style: normalTextWithGrey700,
-                                      //         textAlign: TextAlign.left,
-                                      //       ),
-                                      //     ),
-                                      //   ],
-                                      // ),
-                                      // SizedBox(height: 4),
-                                      // (photos.length <= 0)
-                                      //     ? InkWell(
-                                      //         onTap: () {
-                                      //           showModalBottomSheet(
-                                      //               isDismissible: false,
-                                      //               context: this.context,
-                                      //               builder: ((builder) =>
-                                      //                   bottomSheet()));
-                                      //         },
-                                      //         child: Row(
-                                      //           mainAxisAlignment:
-                                      //               MainAxisAlignment.start,
-                                      //           children: [
-                                      //             Container(
-                                      //                 margin: EdgeInsets.zero,
-                                      //                 padding: EdgeInsets.zero,
-                                      //                 //color: Colors.green,
-                                      //                 alignment:
-                                      //                     Alignment.topLeft,
-                                      //                 child: Image.asset(
-                                      //                   'assets/imgs/no_image.png',
-                                      //                   width: 80,
-                                      //                   height: 90,
-                                      //                 )),
-                                      //           ],
-                                      //         ),
-                                      //       )
-                                      //     : Padding(
-                                      //         padding: EdgeInsets.only(
-                                      //             right: 6, top: 5),
-                                      //         child: GridView.builder(
-                                      //           physics: ScrollPhysics(),
-                                      //           shrinkWrap: true,
-                                      //           gridDelegate:
-                                      //               SliverGridDelegateWithFixedCrossAxisCount(
-                                      //                   crossAxisCount: 5),
-                                      //           itemCount: photos.length,
-                                      //           itemBuilder: (_, index) =>
-                                      //               Padding(
-                                      //             padding: EdgeInsets.only(
-                                      //                 top: 8,
-                                      //                 bottom: 8,
-                                      //                 right: 8),
-                                      //             child: Container(
-                                      //               width: size.width,
-                                      //               child: Image.file(
-                                      //                 photos[index],
-                                      //                 fit: BoxFit.cover,
-                                      //               ),
-                                      //             ),
-                                      //           ),
-                                      //         ),
-                                      //       ),
-                                      SizedBox(
-                                        height: 30,
-                                      ),
-                                      SizedBox(
-                                          height: 45,
-                                          width: double.infinity,
-                                          child: ElevatedButton(
-                                              style: ButtonStyle(
-                                                  backgroundColor:
-                                                      MaterialStateProperty.all(
-                                                          ColorObj.mainColor),
-                                                  shape: MaterialStateProperty.all(
-                                                      const RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          5))))),
-                                              onPressed: _submitRequest,
-                                              child: Text(
-                                                "Submit Request",
-                                                style: normalLargeWhiteText,
-                                              ))),
-                                      GestureDetector(
-                                        onTap: () {
-                                          _openFileExplorer();
-                                        },
-                                        child: Container(
-                                          padding:
-                                              EdgeInsets.only(left: 5, top: 10),
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                MdiIcons.attachment,
-                                                color: ColorObj.secondColor,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                'Attachment ( optional )',
-                                                style: normalMediumGreyText,
-                                              ),
-                                            ],
+                                          border: Border.all(
+                                            color: ColorObj.dropDownBorderColor,
                                           ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 10),
-                                        child: Text(path != null ? path : " "),
+                                        child: TextFormField(
+                                          controller: descController,
+                                          textAlign: TextAlign.left,
+                                          cursorColor: Colors.grey,
+                                          style: normalTextWithBlack,
+                                          decoration: InputDecoration(
+                                            // hintText:
+                                            //     'Enter............',
+                                            hintStyle: smallTextWithGrey700,
+                                            border: InputBorder.none,
+                                          ),
+                                          onChanged: ((value) async {
+                                            setState(() {});
+                                          }),
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            const Divider(),
+                            const SizedBox(height: 10),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  AppStrings.expenseProduct,
+                                  style: normalMediumGreyText,
+                                ),
+                                Container(
+                                  height: 40,
+                                  margin: const EdgeInsets.only(top: 8),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 6,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(6),
+                                    ),
+                                    border: Border.all(
+                                      color: ColorObj.dropDownBorderColor,
+                                    ),
+                                  ),
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton2(
+                                      dropdownFullScreen: true,
+                                      dropdownDecoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(5),
+                                        ),
+                                      ),
+                                      isExpanded: true,
+                                      hint: Text(
+                                        AppStrings.selectExpenseProduct,
+                                        style: normalMediumGreyText,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      items: _addDividersAfterItems(
+                                        expenseProductList,
+                                      ),
+                                      itemHeight: 20,
+                                      value: expenseTypeId,
+                                      onChanged: (value) async {
+                                        expenseTypeId = value as int;
+
+                                        for (var element
+                                            in expenseProductList) {
+                                          if (expenseTypeId ==
+                                              element.expenseProductId) {
+                                            selectedExpense = element;
+                                          }
+                                        }
+
+                                        setState(() {});
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            const Divider(),
+                            const SizedBox(height: 10),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  AppStrings.expenseTax,
+                                  style: normalMediumGreyText,
+                                ),
+                                Container(
+                                  height: 40,
+                                  margin: const EdgeInsets.only(top: 8),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 6,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(6),
+                                    ),
+                                    border: Border.all(
+                                      color: ColorObj.dropDownBorderColor,
+                                    ),
+                                  ),
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton2(
+                                      dropdownFullScreen: true,
+                                      dropdownDecoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(5),
+                                        ),
+                                      ),
+                                      isExpanded: true,
+                                      hint: Text(
+                                        AppStrings.selectExpenseTax,
+                                        style: normalMediumGreyText,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      items:
+                                          _addDividersAfterItemsForAnalyticAccount(
+                                            expenseTaxList,
+                                          ),
+                                      itemHeight: 20,
+                                      value: expenseTaxId,
+                                      onChanged: (value) async {
+                                        expenseTaxId = value as int;
+
+                                        for (var element in expenseTaxList) {
+                                          if (expenseTaxId ==
+                                              element.expenseTaxId) {
+                                            selectedExpenseTax = element;
+                                          }
+                                        }
+
+                                        setState(() {});
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            const Divider(),
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        AppStrings.billReference,
+                                        style: normalMediumGreyText,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Container(
+                                        height: 40,
+                                        width: double.infinity,
+
+                                        padding: const EdgeInsets.only(
+                                          left: 10,
+                                          right: 10,
+                                          bottom: 8,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            5,
+                                          ),
+                                          border: Border.all(
+                                            color: ColorObj.dropDownBorderColor,
+                                          ),
+                                        ),
+                                        child: TextFormField(
+                                          controller: billRefController,
+                                          textAlign: TextAlign.left,
+                                          cursorColor: Colors.grey,
+                                          style: normalTextWithBlack,
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+
+                                            hintStyle: smallTextWithGrey700,
+                                          ),
+                                          onChanged: ((value) async {
+                                            setState(() {});
+                                          }),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            const Divider(),
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        AppStrings.totalKs,
+                                        style: normalMediumGreyText,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Container(
+                                        height: 40,
+                                        width: double.infinity,
+                                        // margin: EdgeInsets.only(left: 20),
+                                        padding: const EdgeInsets.only(
+                                          left: 10,
+                                          right: 10,
+                                          bottom: 8,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            5,
+                                          ),
+                                          border: Border.all(
+                                            color: ColorObj.dropDownBorderColor,
+                                          ),
+                                        ),
+                                        child: TextFormField(
+                                          controller: totalAmountController,
+                                          keyboardType: TextInputType.number,
+                                          textAlign: TextAlign.left,
+                                          cursorColor: Colors.grey,
+                                          style: normalTextWithBlack,
+                                          decoration: InputDecoration(
+                                            hintStyle: smallTextWithGrey700,
+                                            border: InputBorder.none,
+                                          ),
+                                          onFieldSubmitted: (value) async {
+                                            total = double.parse(
+                                              value.toString(),
+                                            );
+                                            totalAmountController.text =
+                                                numberFormat.format(total);
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            const Divider(),
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                            top: 16,
+                                          ),
+                                          child: Text(
+                                            AppStrings.paidBy,
+                                            style: normalMediumGreyText,
+                                            textAlign: TextAlign.left,
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 6,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            RadioListTile(
+                                              contentPadding:
+                                                  const EdgeInsets.all(0),
+                                              dense: true,
+                                              value: 0,
+                                              groupValue: _groupValue,
+                                              title: Text(
+                                                AppStrings.employeeToReimburse,
+                                                style: const TextStyle(fontSize: 14),
+                                              ),
+                                              onChanged: (newValue) {
+                                                setState(() {
+                                                  _groupValue = int.parse(
+                                                    newValue.toString(),
+                                                  );
+                                                  empSelect = true;
+                                                  companySelect = false;
+                                                  paidBy = 'own_account';
+                                                });
+                                              },
+                                              activeColor: _groupValue == 0
+                                                  ? Colors.lightBlue[900]
+                                                  : Colors.black,
+                                              selected: empSelect,
+                                            ),
+                                            RadioListTile(
+                                              contentPadding:
+                                                  const EdgeInsets.all(0),
+                                              dense: true,
+                                              value: 1,
+                                              groupValue: _groupValue,
+                                              title: Text(
+                                                AppStrings.company,
+                                                style: const TextStyle(fontSize: 14),
+                                              ),
+                                              onChanged: (newValue) {
+                                                log('onChanged---$newValue');
+                                                setState(() {
+                                                  _groupValue = int.parse(
+                                                    newValue.toString(),
+                                                  );
+
+                                                  companySelect = true;
+                                                  empSelect = false;
+                                                  paidBy = 'company_account';
+                                                });
+                                              },
+                                              activeColor: _groupValue == 1
+                                                  ? Colors.lightBlue[900]
+                                                  : Colors.black,
+                                              selected: companySelect,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                //Expanded(child: Container())
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            const Divider(),
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        AppStrings.note,
+                                        style: normalMediumGreyText,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Container(
+                                        // height: 40,
+                                        width: double.infinity,
+                                        //  margin: EdgeInsets.only(right: 20),
+                                        padding: const EdgeInsets.only(
+                                          left: 10,
+                                          right: 10,
+                                          bottom: 8,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          // color: Color(0xffF5F5F5),
+                                          borderRadius: BorderRadius.circular(
+                                            5,
+                                          ),
+                                          border: Border.all(
+                                            color: ColorObj.dropDownBorderColor,
+                                          ),
+                                        ),
+                                        child: TextFormField(
+                                          controller: noteController,
+                                          textAlign: TextAlign.left,
+                                          cursorColor: Colors.grey,
+                                          style: normalTextWithBlack,
+                                          decoration: InputDecoration(
+                                            // hintText:
+                                            //     '............',
+                                            hintStyle: smallTextWithGrey700,
+                                            border: InputBorder.none,
+                                          ),
+                                          maxLines: 5,
+                                          onChanged: ((value) async {
+                                            setState(() {});
+                                          }),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: 30),
+                            SizedBox(
+                              height: 45,
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: WidgetStateProperty.all(
+                                    ColorObj.mainColor,
+                                  ),
+                                  shape: WidgetStateProperty.all(
+                                    const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(5),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                onPressed: _submitRequest,
+                                child: Text(
+                                  AppStrings.submitRequest,
+                                  style: normalLargeWhiteText,
+                                ),
                               ),
-                            ])))))),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                _openFileExplorer();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.only(
+                                  left: 5,
+                                  top: 10,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      MdiIcons.attachment,
+                                      color: ColorObj.secondColor,
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Text(
+                                      AppStrings.attachment,
+                                      style: normalMediumGreyText,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: Text(path),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -1001,87 +784,72 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
   _submitRequest() async {
     bool checkInternet = await InternetConnectionChecker.instance.hasConnection;
     if (checkInternet == false) {
+      // ignore: use_build_context_synchronously
       showDialog(context: context, builder: (_) => CustomEventDialog());
       return;
     }
 
-    if (descController.text == null || descController.text == '') {
+    if (descController.text == '') {
       toast!.showToast(
-        child: Widgets().getWarningToast('Please enter description'),
+        child: Widgets().getWarningToast(AppStrings.pleaseEnterDescription),
         gravity: ToastGravity.BOTTOM,
-        toastDuration: Duration(seconds: 2),
+        toastDuration: const Duration(seconds: 2),
       );
       return;
     }
 
     if (selectedExpense == null) {
       toast!.showToast(
-        child: Widgets().getWarningToast('Please select expense product'),
+        child: Widgets().getWarningToast(AppStrings.pleaseSelectExpenseProduct),
         gravity: ToastGravity.BOTTOM,
-        toastDuration: Duration(seconds: 2),
+        toastDuration: const Duration(seconds: 2),
       );
       return;
     }
 
-    // if (billRefController.text == null || billRefController.text == '') {
-    //   toast!.showToast(
-    //     child: Widgets().getWarningToast('Please enter bill reference'),
-    //     gravity: ToastGravity.BOTTOM,
-    //     toastDuration: Duration(seconds: 2),
-    //   );
-    //   return;
-    // }
-
-    if (totalAmountController.text == null ||
-        totalAmountController.text == '') {
+    if (totalAmountController.text == '') {
       toast!.showToast(
-        child: Widgets().getWarningToast('Please enter total amount'),
+        child: Widgets().getWarningToast(AppStrings.pleaseEnterTotalAmount),
         gravity: ToastGravity.BOTTOM,
-        toastDuration: Duration(seconds: 2),
+        toastDuration: const Duration(seconds: 2),
       );
       return;
     }
 
-    // if (noteController.text == null || noteController.text == '') {
-    //   toast!.showToast(
-    //     child: Widgets().getWarningToast('Please enter note'),
-    //     gravity: ToastGravity.BOTTOM,
-    //     toastDuration: Duration(seconds: 2),
-    //   );
-    //   return;
-    // }
-
-    EasyLoading.show(status: 'Submitting. Please Wait...');
+    EasyLoading.show(status: AppStrings.submittingPleaseWait);
 
     var amount = totalAmountController.text.toString().replaceAll(",", "");
-    print('amount-------$amount');
+    log('amount-------$amount');
 
-    print(
-        'selectedExpenseTax-${selectedExpenseTax} : ${selectedExpenseTax.runtimeType.toString()}');
+    log(
+      'selectedExpenseTax-$selectedExpenseTax : ${selectedExpenseTax.runtimeType.toString()}',
+    );
 
     Expense expense = Expense(
-        0,
-        descController.text.toString(),
-        selectedFormatDate,
-        billRefController.text.toString(),
-        selectedExpense!.expenseProductId,
-        selectedExpense!.name,
-        double.parse(amount.toString()),
-        1,
-        total,
-        paidBy,
-        noteController.text.toString(),
-        'draft',
-        0,
-        selectedExpenseTax != null ? selectedExpenseTax!.expenseTaxId : 0,
-        //0,
-        base64Image);
+      0,
+      descController.text.toString(),
+      selectedFormatDate,
+      billRefController.text.toString(),
+      selectedExpense!.expenseProductId,
+      selectedExpense!.name,
+      double.parse(amount.toString()),
+      1,
+      total,
+      paidBy,
+      noteController.text.toString(),
+      'draft',
+      0,
+      selectedExpenseTax != null ? selectedExpenseTax!.expenseTaxId : 0,
+      //0,
+      base64Image,
+    );
 
     var createResult = await expenseApi.createExpense(expense);
 
-    print('createResult-----$createResult');
+    log('createResult-----$createResult');
 
     if (createResult['result'] == 'fail') {
+      // ignore: prefer_typing_uninitialized_variables
       var resultMessage;
       if (createResult['message'] == '') {
         resultMessage = 'Fail';
@@ -1090,18 +858,24 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
         if (resultMessage == 'Invalid cookie.') {
           EasyLoading.dismiss();
           toast!.showToast(
-            child:
-                Widgets().getErrorToast('Session Expired.Please login again.'),
+            child: Widgets().getErrorToast(
+              AppStrings.sessionExpiredPleaseLoginAgain,
+            ),
             gravity: ToastGravity.BOTTOM,
-            toastDuration: Duration(seconds: 3),
+            toastDuration: const Duration(seconds: 3),
           );
           await pref.setString('jwt_token', "null");
-          await Future.delayed(Duration(seconds: 4));
+          await Future.delayed(const Duration(seconds: 4));
           // timer = Timer.periodic(Duration(seconds: 3), (timer) {
+          // ignore: use_build_context_synchronously
           Navigator.of(_scaffoldCtx).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (BuildContext context) {
-            return LoginScreen();
-          }), (route) => false);
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return const LoginScreen();
+              },
+            ),
+            (route) => false,
+          );
 
           //});
           return;
@@ -1112,7 +886,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
       toast!.showToast(
         child: Widgets().getErrorToast('$resultMessage'),
         gravity: ToastGravity.BOTTOM,
-        toastDuration: Duration(seconds: 2),
+        toastDuration: const Duration(seconds: 2),
       );
       return;
     }
@@ -1120,15 +894,18 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
     EasyLoading.dismiss();
 
     toast!.showToast(
-      child: Widgets().getSuccessToast('Request successfully created.'),
+      child: Widgets().getSuccessToast(AppStrings.requestSuccessfullyCreated),
       gravity: ToastGravity.BOTTOM,
-      toastDuration: Duration(seconds: 2),
+      toastDuration: const Duration(seconds: 2),
     );
 
+    // ignore: use_build_context_synchronously
     await Navigator.pushReplacementNamed(context, '/expense');
   }
 
+  @override
   void dispose() {
+  
     super.dispose();
   }
 
@@ -1136,40 +913,42 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
     return SingleChildScrollView(
       child: Container(
         height: MediaQuery.of(context).size.height * 0.12,
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           children: [
             Text(
-              'Take attachment photo',
+              AppStrings.takeAttachmentPhoto,
               textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: 20.0,
-              ),
+              style: const TextStyle(fontSize: 20.0),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton.icon(
-                  icon: Icon(
-                    Icons.camera,
-                    color: ColorObj.mainColor,
-                  ),
+                  icon: const Icon(Icons.camera, color: ColorObj.mainColor),
                   onPressed: () {
                     takephoto(ImageSource.camera);
-                    Navigator.pop(this.context);
+                    Navigator.pop(context);
                   },
-                  label: Text(
-                    'Camera',
-                    style: smallTextWithPurple,
-                  ),
+                  label: Text(AppStrings.camera, style: smallTextWithPurple),
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      side: BorderSide(
-                        color: ColorObj.mainColor,
-                        width: 1,
-                      )),
-                )
+                    backgroundColor: Colors.white,
+                    side: const BorderSide(color: ColorObj.mainColor, width: 1),
+                  ),
+                ),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.camera, color: ColorObj.mainColor),
+                  onPressed: () {
+                    takephoto(ImageSource.camera);
+                    Navigator.pop(context);
+                  },
+                  label: Text(AppStrings.camera, style: smallTextWithPurple),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    side: const BorderSide(color: ColorObj.mainColor, width: 1),
+                  ),
+                ),
               ],
             ),
           ],
@@ -1179,10 +958,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
   }
 
   takephoto(ImageSource source) async {
-    final pickedFile = await _picker.getImage(
-      imageQuality: 85,
-      source: source,
-    );
+    final pickedFile = await _picker.pickImage(imageQuality: 85, source: source);
     setState(() {
       _imageFile = File(pickedFile!.path);
     });

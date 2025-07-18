@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:platform_device_id/platform_device_id.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';

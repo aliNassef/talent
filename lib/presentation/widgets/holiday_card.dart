@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+// ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:talent/utility/style/theme.dart';
  import '../../data/models/holiday/holiday.dart';
 
+// ignore: must_be_immutable
 class HolidayCardWidget extends StatefulWidget {
   Holiday holiday;
-  HolidayCardWidget(this.holiday);
+  HolidayCardWidget({Key? key, required this.holiday}) : super(key: key);
 
   @override
   State<HolidayCardWidget> createState() => _HolidayCardWidgetState();
@@ -25,8 +27,8 @@ class _HolidayCardWidgetState extends State<HolidayCardWidget> {
   }
 
   void dateFormatChange() {
-    var startDate;
-    var endDate;
+    String startDate;
+    String endDate;
     startDate =
         DateFormat.MMMEd().format(DateTime.parse(widget.holiday.date_from!));
     start = startDate.split(',');

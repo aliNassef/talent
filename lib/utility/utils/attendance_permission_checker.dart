@@ -1,4 +1,5 @@
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'dart:developer';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,37 +12,37 @@ class AttendanceChecker {
   // Function to check permission and location
   Future<bool> checkAttendancePermission() async {
     // Request location permission
-  
+
     bool isLocationEnabled = await _checkLocationPermission();
     var pref = await SharedPreferences.getInstance();
 
-    var attDistanceTemp = await pref.getString('attendanceDistance');
-    var officeLatTemp = await pref.getString('office_lat');
-    var officeLongTemp = await pref.getString('office_long');
+    var attDistanceTemp = pref.getString('attendanceDistance');
+    var officeLatTemp = pref.getString('office_lat');
+    var officeLongTemp = pref.getString('office_long');
 
-    print('office----${officeLatTemp} ${officeLongTemp}  : ${attDistanceTemp}');
-     
+    log('office----$officeLatTemp $officeLongTemp  : $attDistanceTemp');
+
     allowedDistanceInKm = double.parse(attDistanceTemp.toString()) / 1000;
     targetLatitude = double.parse(officeLatTemp.toString());
     targetLongitude = double.parse(officeLongTemp.toString());
 
     if (!isLocationEnabled) {
-      print("Location permission not granted or GPS is off");
+      log("Location permission not granted or GPS is off");
       return false;
     }
 
-    
-
-    
-    
-    print(
-        'target----${targetLatitude} ${targetLongitude}  : ${allowedDistanceInKm}');
+    log(
+      'target----${targetLatitude} ${targetLongitude}  : ${allowedDistanceInKm}',
+    );
     // Get user's current position
     Position userPosition = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+      // ignore: deprecated_member_use
+      desiredAccuracy: LocationAccuracy.high,
+    );
 
-    print(
-        'userPosition---${userPosition.latitude}  ${userPosition.longitude}  : ${userPosition.toJson()}');
+    log(
+      'userPosition---${userPosition.latitude}  ${userPosition.longitude}  : ${userPosition.toJson()}',
+    );
 
     double distanceInKm = Geolocator.distanceBetween(
       targetLatitude,
@@ -50,16 +51,16 @@ class AttendanceChecker {
       userPosition.longitude,
     );
 
-    print('distanceInMeters---${distanceInKm}');
+    log('distanceInMeters---$distanceInKm');
 
-    print('allowedDistanceInKm----------$allowedDistanceInKm  : $distanceInKm');
+    log('allowedDistanceInKm----------$allowedDistanceInKm  : $distanceInKm');
 
     // Check if within allowed distance
     if (distanceInKm / 1000 <= allowedDistanceInKm) {
-      print("Within allowed distance: $distanceInKm km");
+      log("Within allowed distance: $distanceInKm km");
       return true; // Attendance permission granted
     } else {
-      print("Outside allowed distance: $distanceInKm km");
+      log("Outside allowed distance: $distanceInKm km");
       return false; // Attendance permission denied
     }
   }

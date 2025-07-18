@@ -1,10 +1,7 @@
-import 'dart:ui';
-import 'package:flutter/material.dart';
-
 class MessageAndAlertText {
   static const String enterUrl = 'Please enter url.';
 
-   static const String enterDatabase = 'Please select database.';
+  static const String enterDatabase = 'Please select database.';
 
   static const String enterDesc = 'Please enter description!.';
 
@@ -33,6 +30,5 @@ class MessageAndAlertText {
 
   static const String takeAttachPhoto = 'Please take attachment photo!';
 
-  
   static const String expenseUpdateSuccess = 'Expense updated successfully!';
 }

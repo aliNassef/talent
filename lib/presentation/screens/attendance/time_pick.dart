@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../../../utility/style/theme.dart';
 
 
+// ignore: must_be_immutable
 class TimePickerWidget extends StatefulWidget {
   String text;
   Function(DateTime) timePicker;
@@ -25,7 +28,7 @@ class _TimePickerWidgetState extends State<TimePickerWidget> {
       onTap: ()async{
         time = await showDatePicker(context: context, initialDate: widget.init, firstDate: DateTime(2000), lastDate: DateTime(3000));
         if(time != null){
-          print(time);
+          log(time.toString());
           setState(() {
             widget.timePicker(time!);
           });

@@ -1992,7 +1992,7 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(image, width: width, height: height),
-            Text(title.tr(), style: const TextStyle(fontSize: 12)),
+            Text(title, style: const TextStyle(fontSize: 12)),
             Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
           ],
         ),

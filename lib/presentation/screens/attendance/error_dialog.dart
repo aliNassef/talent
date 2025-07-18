@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../utility/style/theme.dart';
 
 
+// ignore: must_be_immutable
 class ErrorDialog extends StatelessWidget {
   String title;
   Widget content;
@@ -51,7 +52,7 @@ class ErrorDialog extends StatelessWidget {
                 const SizedBox(
                   height:20,
                 ),
-                 ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all(ColorObj.mainColor)), onPressed: (){Navigator.pop(context);}, child: const Text("Ok"))
+                 ElevatedButton(style: ButtonStyle(backgroundColor: WidgetStateProperty.all(ColorObj.mainColor)), onPressed: (){Navigator.pop(context);}, child: const Text("Ok"))
               ],
             ),
           ),
