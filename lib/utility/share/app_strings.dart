@@ -172,4 +172,5 @@ abstract class AppStrings {
   static String work = 'work'.tr();
   static String home = 'home'.tr();
   static String workEmail = 'work_email'.tr();
+  static String waitting = 'waitting'.tr();
 }

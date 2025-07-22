@@ -210,7 +210,7 @@ class WaitingScreenState extends State<WaitingScreen> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return RejectScreen();
+            return const RejectScreen();
           },
         ),
       );
@@ -250,9 +250,9 @@ class WaitingScreenState extends State<WaitingScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Waiting',
-              style: TextStyle(
+            Text(
+              AppStrings.waitting,
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 40,
                 fontWeight: FontWeight.bold,
