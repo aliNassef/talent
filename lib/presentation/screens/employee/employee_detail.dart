@@ -16,28 +16,32 @@ import '../../widgets/custom_event_dialog.dart';
 import '../dashboard/dashboard_main.dart';
 
 class EmployeeDetailScreen extends StatefulWidget {
-  _EmployeeDetailScreenState createState() => _EmployeeDetailScreenState();
+  const EmployeeDetailScreen({super.key});
+
+  @override
+  EmployeeDetailScreenState createState() => EmployeeDetailScreenState();
 }
 
-class _EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
+class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
+  // ignore: prefer_typing_uninitialized_variables
   var pref;
   int? userId;
+  // ignore: prefer_typing_uninitialized_variables
   var userLevel;
   Uint8List? bytes;
   var employeeDao = EmployeeDao();
   Employee? employee;
   var empApi = EmployeeAPI();
+  // ignore: prefer_typing_uninitialized_variables
   var password;
   bool createPassword = false;
   bool fetchEmpUpdateData = false;
+  // ignore: prefer_typing_uninitialized_variables
   var uid;
 
+  @override
   void initState() {
     super.initState();
-    // for (int i = 0; i < menuActive.length; i++) {
-    //   menuActive[i] = false;
-    // }
-    // menuActive[1] = true;
     loadData();
   }
 
@@ -55,235 +59,231 @@ class _EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
       createPassword = true;
     }
 
-    if (employee!.avatar != '')
+    if (employee!.avatar != '') {
       bytes = base64.decode("${employee!.avatar}");
-    else
+    } else {
       bytes = null;
+    }
 
     setState(() {});
   }
 
+  @override
   void dispose() {
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushAndRemoveUntil(context,
-            MaterialPageRoute(builder: (BuildContext context) {
-          return HomeScreen();
-        }), (r) {
-          return false;
-        });
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) {
+              return const HomeScreen();
+            },
+          ),
+          (r) {
+            return false;
+          },
+        );
         // Navigator.pop(context);
 
         return false;
       },
       child: Scaffold(
         body: NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-                SliverAppBar(
-                  leading: InkWell(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                leading: InkWell(
                   onTap: () {
                     if (!mounted) return;
                     Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (BuildContext context) {
-                      return HomeScreen();
-                    }));
-                  },
-                  child: Icon(Icons.home)),
-                  backgroundColor: ColorObj.mainColor,
-                  expandedHeight: 200.0,
-                  floating: false,
-                  pinned: true,
-                  flexibleSpace: FlexibleSpaceBar(
-                    title: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                            employee != null
-                                ? employee!.employee_name.toString()
-                                : '',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                            )),
-                        InkWell(
-                            onTap: () async {
-                              bool checkInternet =
-                                  await InternetConnectionChecker
-                              .instance
-                                      .hasConnection;
-                              if (checkInternet == false) {
-                                showDialog(
-                                    context: context,
-                                    builder: (_) => CustomEventDialog());
-                                return;
-                              }
-                              EasyLoading.show(
-                                  status: 'Fetching update data...........');
-                              var employeeApi = EmployeeAPI();
-                              await employeeApi.getEmployeeList();
-                              employee =
-                                  await employeeDao.getSingleEmployeeById(uid);
-
-                              EasyLoading.dismiss();
-                              setState(() {});
-                            },
-                            child: Container(
-                              margin: EdgeInsets.only(bottom: 3, right: 5),
-                              child: Icon(
-                                Icons.refresh,
-                                color: Colors.green,
-                                size: 25,
-                              ),
-                            ))
-                      ],
-                    ),
-                    background: bytes != null
-                        ? Image.memory(bytes!, fit: BoxFit.cover)
-                        : Image(
-                            image: AssetImage('assets/imgs/default_avator.png'),
-                            fit: BoxFit.cover,
-                          ),
-                  ),
-                ),
-              ];
-            },
-            body: Container(
-              child: ListView(
-                children: <Widget>[
-                  Container(
-                    child: ListTile(
-                      dense: true,
-
-                      visualDensity: VisualDensity(vertical: -2), // to compact
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            employee != null
-                                ? employee!.job_name.toString()
-                                : '',
-                            textAlign: TextAlign.left,
-                            style: normalLargeGreyText,
-                          ),
-                          // Row(
-                          //   children: [
-                          //     Text(
-                          //       'Job Grade : ',
-                          //       textAlign: TextAlign.left,
-                          //       style: normalLargeGreyText,
-                          //     ),
-                          //     Text(
-                          //       employee != null
-                          //           ? employee!.job_grade.toString()
-                          //           : '',
-                          //       textAlign: TextAlign.left,
-                          //       style: normalLargeBlueText,
-                          //     ),
-                          //   ],
-                          // ),
-                       
-                        ],
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return const HomeScreen();
+                        },
                       ),
-                    ),
-                  ),
-                  Divider(
-                    height: 2,
-                    thickness: 1.5,
-                  ),
-                  ListTile(
-                    leading: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          MdiIcons.clipboardAccount,
-                          color: Color(0xff208d9c),
+                    );
+                  },
+                  child: const Icon(Icons.home),
+                ),
+                backgroundColor: ColorObj.mainColor,
+                expandedHeight: 200.0,
+                floating: false,
+                pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        employee != null
+                            ? employee!.employee_name.toString()
+                            : '',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.0,
                         ),
-                      ],
-                    ),
-                    title:
-                        Text('Registration Number', style: normalSmallGreyText),
-                    subtitle: Text(
-                      employee != null
-                          ? employee!.employee_code.toString()
-                          : '',
-                      style: normalMediumBalckText,
-                    ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          bool checkInternet = await InternetConnectionChecker
+                              .instance
+                              .hasConnection;
+                          if (checkInternet == false) {
+                            showDialog(
+                              // ignore: use_build_context_synchronously
+                              context: context,
+                              builder: (_) => CustomEventDialog(),
+                            );
+                            return;
+                          }
+                          EasyLoading.show(
+                            status: 'Fetching update data...........',
+                          );
+                          var employeeApi = EmployeeAPI();
+                          await employeeApi.getEmployeeList();
+                          employee = await employeeDao.getSingleEmployeeById(
+                            uid,
+                          );
+
+                          EasyLoading.dismiss();
+                          setState(() {});
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 3, right: 5),
+                          child: const Icon(
+                            Icons.refresh,
+                            color: Colors.green,
+                            size: 25,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  ListTile(
-                    leading: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(MdiIcons.genderMaleFemale,
-                            color: Color(0xff208d9c)),
-                      ],
-                    ),
-                    title: Text('Gender', style: normalSmallGreyText),
-                    subtitle: Text(
-                        employee != null ? employee!.gender.toString() : '',
-                        style: normalMediumBalckText),
-                  ),
-                  ListTile(
-                    leading: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(MdiIcons.cakeVariant, color: Color(0xff208d9c))
-                      ],
-                    ),
-                    title: Text('Birthday', style: normalSmallGreyText),
-                    subtitle: Text(
-                        employee != null ? employee!.birthday.toString() : '',
-                        style: normalMediumBalckText),
-                  ),
-                  ListTile(
-                    leading: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(MdiIcons.phone, color: Color(0xff208d9c)),
-                      ],
-                    ),
-                    title: Text('Work', style: normalSmallGreyText),
-                    subtitle: Text(
-                        employee != null ? employee!.work_phone! : '',
-                        style: normalMediumBalckText),
-                    // trailing: Icon(MdiIcons.messageBulleted,
-                    //     color: Color(0xff208d9c)),
-                  ),
-                  ListTile(
-                    leading: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(MdiIcons.phone, color: Color(0xff208d9c)),
-                      ],
-                    ),
-                    title: Text('Home', style: normalSmallGreyText),
-                    subtitle: Text(
-                        employee != null ? employee!.mobile_phone! : '',
-                        style: normalMediumBalckText),
-                  ),
-                  ListTile(
-                    leading: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(MdiIcons.email, color: Color(0xff208d9c)),
-                      ],
-                    ),
-                    title: Text('Work Email', style: normalSmallGreyText),
-                    subtitle: Text(
-                        employee != null ? employee!.email.toString() : '',
-                        style: normalMediumBalckText),
-                  ),
-                ],
+                  background: bytes != null
+                      ? Image.memory(bytes!, fit: BoxFit.cover)
+                      : const Image(
+                          image: AssetImage('assets/imgs/default_avator.png'),
+                          fit: BoxFit.cover,
+                        ),
+                ),
               ),
-            )),
-      //  drawer: drawerWidget(context, employee, odoo, createPassword),
+            ];
+          },
+          body: ListView(
+            children: <Widget>[
+              ListTile(
+                dense: true,
+
+                visualDensity: const VisualDensity(vertical: -2), // to compact
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      employee != null ? employee!.job_name.toString() : '',
+                      textAlign: TextAlign.left,
+                      style: normalLargeGreyText,
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(height: 2, thickness: 1.5),
+              ListTile(
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      MdiIcons.clipboardAccount,
+                      color: const Color(0xff208d9c),
+                    ),
+                  ],
+                ),
+                title: Text('Registration Number', style: normalSmallGreyText),
+                subtitle: Text(
+                  employee != null ? employee!.employee_code.toString() : '',
+                  style: normalMediumBalckText,
+                ),
+              ),
+              ListTile(
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      MdiIcons.genderMaleFemale,
+                      color: const Color(0xff208d9c),
+                    ),
+                  ],
+                ),
+                title: Text('Gender', style: normalSmallGreyText),
+                subtitle: Text(
+                  employee != null ? employee!.gender.toString() : '',
+                  style: normalMediumBalckText,
+                ),
+              ),
+              ListTile(
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(MdiIcons.cakeVariant, color: const Color(0xff208d9c)),
+                  ],
+                ),
+                title: Text('Birthday', style: normalSmallGreyText),
+                subtitle: Text(
+                  employee != null ? employee!.birthday.toString() : '',
+                  style: normalMediumBalckText,
+                ),
+              ),
+              ListTile(
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(MdiIcons.phone, color: const Color(0xff208d9c)),
+                  ],
+                ),
+                title: Text('Work', style: normalSmallGreyText),
+                subtitle: Text(
+                  employee != null ? employee!.work_phone! : '',
+                  style: normalMediumBalckText,
+                ),
+                // trailing: Icon(MdiIcons.messageBulleted,
+                //     color: Color(0xff208d9c)),
+              ),
+              ListTile(
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(MdiIcons.phone, color: const Color(0xff208d9c)),
+                  ],
+                ),
+                title: Text('Home', style: normalSmallGreyText),
+                subtitle: Text(
+                  employee != null ? employee!.mobile_phone! : '',
+                  style: normalMediumBalckText,
+                ),
+              ),
+              ListTile(
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(MdiIcons.email, color: const Color(0xff208d9c)),
+                  ],
+                ),
+                title: Text('Work Email', style: normalSmallGreyText),
+                subtitle: Text(
+                  employee != null ? employee!.email.toString() : '',
+                  style: normalMediumBalckText,
+                ),
+              ),
+            ],
+          ),
+        ),
+        //  drawer: drawerWidget(context, employee, odoo, createPassword),
       ),
     );
   }
