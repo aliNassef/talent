@@ -139,6 +139,13 @@
     "net_amount": "صافي المبلغ",
     "deduction": "الاستقطاع",
     "employee_code": "كود الموظف",
-    "employee_name": "اسم الموظف"
+    "employee_name": "اسم الموظف",
+    "fetching_update_data": "جارٍ جلب البيانات...",
+    "registration_number": "رقم التسجيل",
+    "gender": "الجنس",
+    "birthday": "تاريخ الميلاد",
+    "work": "عمل",
+    "home": "منزل",
+    "work_email": "بريد العمل"
   }
   

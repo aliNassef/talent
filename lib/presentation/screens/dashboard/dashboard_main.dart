@@ -1000,7 +1000,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => EmployeeDetailScreen(),
+                    builder: (context) => const EmployeeDetailScreen(),
                   ),
                 );
               },
@@ -1068,7 +1068,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => LeaveHistoryListScreen(),
+                      builder: (context) => const LeaveHistoryListScreen(),
                     ),
                   );
                 },
@@ -1104,7 +1104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => LeaveDashBoardScreen(),
+                      builder: (context) => const LeaveDashBoardScreen(),
                     ),
                   );
                 },
@@ -1946,7 +1946,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AttendanceScreen()),
+                    MaterialPageRoute(builder: (context) => const AttendanceScreen()),
                   );
                 },
                 child: _buildAttendanceItem(

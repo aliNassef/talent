@@ -9,6 +9,7 @@ import 'package:talent/utility/style/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/database/dao/employee_dao.dart';
 import '../../../data/models/employee/employee.dart';
+import '../../../utility/share/app_strings.dart';
 import '../../../utility/utils/size_config.dart';
 import '../../widgets/custom_event_dialog.dart';
 // import '../../widgets/drawer_body.dart';
@@ -144,7 +145,7 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                             return;
                           }
                           EasyLoading.show(
-                            status: 'Fetching update data...........',
+                            status: AppStrings.fetchingUpdateData,
                           );
                           var employeeApi = EmployeeAPI();
                           await employeeApi.getEmployeeList();
@@ -204,7 +205,7 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                     ),
                   ],
                 ),
-                title: Text('Registration Number', style: normalSmallGreyText),
+                title: Text(AppStrings.registrationNumber, style: normalSmallGreyText),
                 subtitle: Text(
                   employee != null ? employee!.employee_code.toString() : '',
                   style: normalMediumBalckText,
@@ -220,7 +221,7 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                     ),
                   ],
                 ),
-                title: Text('Gender', style: normalSmallGreyText),
+                title: Text(AppStrings.gender, style: normalSmallGreyText),
                 subtitle: Text(
                   employee != null ? employee!.gender.toString() : '',
                   style: normalMediumBalckText,
@@ -233,7 +234,7 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                     Icon(MdiIcons.cakeVariant, color: const Color(0xff208d9c)),
                   ],
                 ),
-                title: Text('Birthday', style: normalSmallGreyText),
+                title: Text(AppStrings.birthday, style: normalSmallGreyText),
                 subtitle: Text(
                   employee != null ? employee!.birthday.toString() : '',
                   style: normalMediumBalckText,
@@ -246,7 +247,7 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                     Icon(MdiIcons.phone, color: const Color(0xff208d9c)),
                   ],
                 ),
-                title: Text('Work', style: normalSmallGreyText),
+                title: Text(AppStrings.work, style: normalSmallGreyText),
                 subtitle: Text(
                   employee != null ? employee!.work_phone! : '',
                   style: normalMediumBalckText,
@@ -261,7 +262,7 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                     Icon(MdiIcons.phone, color: const Color(0xff208d9c)),
                   ],
                 ),
-                title: Text('Home', style: normalSmallGreyText),
+                title: Text(AppStrings.home, style: normalSmallGreyText),
                 subtitle: Text(
                   employee != null ? employee!.mobile_phone! : '',
                   style: normalMediumBalckText,
@@ -274,7 +275,7 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                     Icon(MdiIcons.email, color: const Color(0xff208d9c)),
                   ],
                 ),
-                title: Text('Work Email', style: normalSmallGreyText),
+                title: Text(AppStrings.workEmail, style: normalSmallGreyText),
                 subtitle: Text(
                   employee != null ? employee!.email.toString() : '',
                   style: normalMediumBalckText,

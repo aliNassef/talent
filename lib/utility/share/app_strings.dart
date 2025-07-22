@@ -165,4 +165,11 @@ abstract class AppStrings {
   static String employeeCode = 'employee_code'.tr();
   static String grossSalary = 'gross_salary'.tr();
   static String employeeName = 'employee_name'.tr();
+  static String fetchingUpdateData = 'fetching_update_data'.tr();
+  static String registrationNumber = 'registration_number'.tr();
+  static String gender = 'gender'.tr();
+  static String birthday = 'birthday'.tr();
+  static String work = 'work'.tr();
+  static String home = 'home'.tr();
+  static String workEmail = 'work_email'.tr();
 }
