@@ -24,7 +24,7 @@ class Root extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    data();
+    String fontFamily = context.locale.languageCode == 'ar' ? 'Cairo' : 'Poppins';
     return MaterialApp(
       key: ValueKey(context.locale),
       title: "SANID",
@@ -45,7 +45,7 @@ class Root extends StatelessWidget {
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'Regular',
+        fontFamily: fontFamily,
         primaryColor: Style.ColorObj.mainColor,
         colorScheme: ColorScheme.fromSwatch().copyWith(
           secondary: Style.ColorObj.mainColor,

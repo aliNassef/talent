@@ -658,9 +658,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    "Monday June 10 - 2022, 07:56 AM",
-                    style: TextStyle(fontSize: 14),
+                  Text(
+                    DateFormat('EEEE MMMM d - yyyy, hh:mm a').format(DateTime.now()),
+                    style: const TextStyle(fontSize: 14),
                   ),
                   ValueListenableBuilder(
                     valueListenable: _timeNotifier,
