@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -105,14 +106,14 @@ class WaitingScreenState extends State<WaitingScreen> {
 
     Employee employee = await employeeDao.getSingleEmployeeById(userId!);
     toast!.showToast(
-      child: Widgets().getDownloadToast(AppStrings.employeeDataDownloaded),
+      child: Widgets().getDownloadToast(AppStrings.employeeDataDownloaded.tr()),
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 1),
     );
 
     await attendanceApi.getAttendanceList(employee.employee_id!);
     toast!.showToast(
-      child: Widgets().getDownloadToast(AppStrings.attendanceDataDownloaded),
+      child: Widgets().getDownloadToast(AppStrings.attendanceDataDownloaded.tr()),
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 1),
     );
@@ -138,7 +139,7 @@ class WaitingScreenState extends State<WaitingScreen> {
 
     await expenseTaxApi.getExpenseTaxListOnline();
     toast!.showToast(
-      child: Widgets().getDownloadToast(AppStrings.expenseDataDownloaded),
+      child: Widgets().getDownloadToast(AppStrings.expenseDataDownloaded.tr()),
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 1),
     );
@@ -148,14 +149,14 @@ class WaitingScreenState extends State<WaitingScreen> {
     await leaveApi.getLeaveTypeList();
     // await leaveApi.getUpcomingHolidayList();
     toast!.showToast(
-      child: Widgets().getDownloadToast(AppStrings.leaveDataDownloaded),
+      child: Widgets().getDownloadToast(AppStrings.leaveDataDownloaded.tr() ),
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 1),
     );
     var paySlipApi = PaySlipAPI();
     await paySlipApi.paySlipList();
-    toast!.showToast(
-      child: Widgets().getDownloadToast(AppStrings.payslipDataDownloaded),
+    toast!.showToast( 
+      child: Widgets().getDownloadToast(AppStrings.payslipDataDownloaded.tr()),
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 1),
     );
@@ -216,7 +217,7 @@ class WaitingScreenState extends State<WaitingScreen> {
       );
     } else if (deviceState == 'Invalid cookie.') {
       toast!.showToast(
-        child: Widgets().getErrorToast(AppStrings.sessionExpiredPleaseLoginAgain),
+        child: Widgets().getErrorToast(AppStrings.sessionExpiredPleaseLoginAgain.tr()),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 3),
       );
@@ -251,7 +252,7 @@ class WaitingScreenState extends State<WaitingScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              AppStrings.waitting,
+              AppStrings.waitting.tr(),
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 40,
@@ -260,7 +261,7 @@ class WaitingScreenState extends State<WaitingScreen> {
             ),
             const SizedBox(height: 10),
             Text(
-              AppStrings.approvalOrDownload,
+              AppStrings.approvalOrDownload.tr(),
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 25,

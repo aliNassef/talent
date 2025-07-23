@@ -26,7 +26,8 @@ class Root extends StatelessWidget {
   Widget build(BuildContext context) {
     data();
     return MaterialApp(
-      title: "Talent HR",
+      key: ValueKey(context.locale),
+      title: "SANID",
       builder: EasyLoading.init(),
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,
@@ -36,9 +37,9 @@ class Root extends StatelessWidget {
         '/': (context) => const WelcomeScreen(),
         '/login': (context) => const LoginScreen(),
         '/dashboard': (context) => const HomeScreen(),
-        '/employee': (context) => EmployeeDetailScreen(),
-        '/attendance': (context) => AttendanceScreen(),
-        '/leave': (context) => LeaveDashBoardScreen(),
+        '/employee': (context) => const EmployeeDetailScreen(),
+        '/attendance': (context) => const AttendanceScreen(),
+        '/leave': (context) => const LeaveDashBoardScreen(),
         '/payslip': (context) => const PaySlipListScreen(),
         '/expense': (context) => const ExpenseListPage(),
       },

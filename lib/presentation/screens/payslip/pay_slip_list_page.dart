@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:talent/presentation/screens/payslip/pay_slip.dart';
@@ -93,7 +94,7 @@ class _PaySlipListScreenState extends State<PaySlipListScreen> {
           ),
           elevation: 0,
           backgroundColor: ColorObj.mainColor,
-          title: Text(AppStrings.paySlip, style: const TextStyle(fontSize: 16)),
+          title: Text(AppStrings.paySlip.tr(), style: const TextStyle(fontSize: 16)),
         ),
         body: FutureBuilder<List<PaySlipModel>>(
           future: PaySlipAPI.paySlip(context),

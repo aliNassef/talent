@@ -297,7 +297,7 @@ class _HomeScreenState extends State<HomeScreen> {
         EasyLoading.dismiss();
 
         toast!.showToast(
-          child: Widgets().getWarningToast(AppStrings.todayAlreadyCheckIn),
+          child: Widgets().getWarningToast(AppStrings.todayAlreadyCheckIn.tr()),
           gravity: ToastGravity.BOTTOM,
           toastDuration: const Duration(seconds: 2),
         );
@@ -436,7 +436,7 @@ class _HomeScreenState extends State<HomeScreen> {
       EasyLoading.dismiss();
 
       toast!.showToast(
-        child: Widgets().getErrorToast(AppStrings.todayAlreadyCheckIn),
+        child: Widgets().getErrorToast(AppStrings.todayAlreadyCheckIn.tr()),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 2),
       );
@@ -468,7 +468,7 @@ class _HomeScreenState extends State<HomeScreen> {
           EasyLoading.dismiss();
           toast!.showToast(
             child: Widgets().getErrorToast(
-              AppStrings.sessionExpiredPleaseLoginAgain,
+              AppStrings.sessionExpiredPleaseLoginAgain.tr(),
             ),
             gravity: ToastGravity.BOTTOM,
             toastDuration: const Duration(seconds: 3),
@@ -503,14 +503,14 @@ class _HomeScreenState extends State<HomeScreen> {
     if (status == 'exist') {
       toast!.showToast(
         child: Widgets().getErrorToast(
-          AppStrings.attendanceDateIsAlreadyExistInTheSystem,
+          AppStrings.attendanceDateIsAlreadyExistInTheSystem.tr(),
         ),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 3),
       );
     } else if (status == 'in') {
       toast!.showToast(
-        child: Widgets().getSuccessToast(AppStrings.checkInSuccessful),
+        child: Widgets().getSuccessToast(AppStrings.checkInSuccessful.tr()),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 3),
       );
@@ -537,7 +537,7 @@ class _HomeScreenState extends State<HomeScreen> {
     } else if (status == 'out') {
       log('else if Checkout successful.-------');
       toast!.showToast(
-        child: Widgets().getSuccessToast(AppStrings.checkOutSuccessful),
+        child: Widgets().getSuccessToast(AppStrings.checkOutSuccessful.tr()),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 3),
       );
@@ -585,7 +585,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    AppStrings.chooseYourWorkingMode,
+                    AppStrings.chooseYourWorkingMode.tr(),
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -615,7 +615,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
-                            AppStrings.office,
+                            AppStrings.office.tr(),
                             style: TextStyle(
                               color: _isOfficeSelected
                                   ? Colors.white
@@ -646,7 +646,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
-                            AppStrings.homeOrOnsite,
+                            AppStrings.homeOrOnsite.tr(),
                             style: TextStyle(
                               color: _remoteSelected
                                   ? Colors.white
@@ -713,7 +713,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             toast.init(context);
                             toast.showToast(
                               child: Widgets().getErrorToast(
-                                AppStrings.youAreNotInAllowedArea,
+                                AppStrings.youAreNotInAllowedArea.tr(),
                               ),
                               gravity: ToastGravity.BOTTOM,
                               toastDuration: const Duration(seconds: 1),
@@ -746,12 +746,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    AppStrings.registerYourPresenceAndStart,
+                    AppStrings.registerYourPresenceAndStart.tr(),
                     style: const TextStyle(fontSize: 12),
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    AppStrings.yourWork,
+                    AppStrings.yourWork.tr(),
                     style: const TextStyle(fontSize: 12),
                     textAlign: TextAlign.center,
                   ),
@@ -804,7 +804,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Container(
                                 margin: const EdgeInsets.only(left: 10),
                                 child: Text(
-                                  AppStrings.confirmation,
+                                  AppStrings.confirmation.tr()    ,
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
@@ -848,7 +848,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   top: 10,
                                 ),
                                 child: Text(
-                                  AppStrings.youAreGoingToExitTheApplication,
+                                  AppStrings.youAreGoingToExitTheApplication.tr(),
                                   style: TextStyle(
                                     color: Colors.grey[800],
                                     fontSize: 15,
@@ -867,7 +867,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.pop(context);
                               },
                               child: Text(
-                                AppStrings.cancel,
+                                AppStrings.cancel.tr(),
                                 style: const TextStyle(
                                   color: ColorObj.mainColor,
                                 ),
@@ -887,7 +887,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 SystemNavigator.pop();
                               },
                               child: Text(
-                                AppStrings.ok,
+                                AppStrings.ok.tr(),
                                 style: const TextStyle(fontSize: 13),
                               ),
                             ),
@@ -912,9 +912,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     var textValue = '';
     if (_isCheckIn == true) {
-      textValue = AppStrings.checkIn;
+      textValue = AppStrings.checkIn.tr();
     } else {
-      textValue = AppStrings.checkOut;
+      textValue = AppStrings.checkOut.tr();
     }
 
     showDialog(
@@ -966,7 +966,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        textValue,
+                        textValue.tr(),
                         style: TextStyle(
                           fontSize: 16,
                           color: _isCheckIn == true ? Colors.green : Colors.red,
@@ -1024,15 +1024,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Text(
                           employee != null
-                              ? "${AppStrings.goodMorning}, ${employee!.employee_name}"
-                              : "${AppStrings.goodMorning}, ",
+                              ? "${AppStrings.goodMorning.tr()}, ${employee!.employee_name}"
+                              : "${AppStrings.goodMorning.tr()}, ",
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          AppStrings.haveAGoodDay,
+                          AppStrings.haveAGoodDay.tr(),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 12,
@@ -1074,11 +1074,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 child: _buildAttendanceItem(
                   'assets/imgs/1.png',
-                  AppStrings.timeOff,
+                  AppStrings.timeOff.tr(),
                   leaveCount.toString(),
-                  Colors.lightBlue[100]!,
-                  42,
-                  42,
+                  const Color(0xffa8f2ff),
+                  45,
+                  45,
                 ),
               ),
               GestureDetector(
@@ -1092,11 +1092,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 child: _buildAttendanceItem(
                   'assets/imgs/6.png',
-                  AppStrings.expense,
+                  AppStrings.expense.tr(),
                   expenseCount.toString(),
-                  Colors.yellow[100]!,
-                  35,
-                  35,
+                  const Color(0xffccccff),
+                  45,
+                  45,
                 ),
               ),
               GestureDetector(
@@ -1109,11 +1109,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
                 child: _buildAttendanceItem(
-                  'assets/imgs/3.png',
-                  AppStrings.leaveLeft,
+                  'assets/imgs/2.png',
+                  AppStrings.leaveLeft.tr(),
                   leaveRemainCount.toStringAsFixed(1),
-                  Colors.green[100]!,
-                  70,
+                  const Color(0xffa8defa),
+                  45,
                   45,
                 ),
               ),
@@ -1171,8 +1171,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: Center(
                                       child: Text(
                                         createPassword
-                                            ? AppStrings.createPassword
-                                            : AppStrings.enterPasswordToAccess,
+                                            ? AppStrings.createPassword.tr()
+                                            : AppStrings.enterPasswordToAccess.tr(),
                                         style: const TextStyle(fontSize: 18),
                                       ),
                                     ),
@@ -1226,7 +1226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             color: Colors.grey,
                                           ), //<-- SEE HERE
                                         ),
-                                        hintText: AppStrings.password,
+                                        hintText: AppStrings.password.tr(),
                                         contentPadding:
                                             const EdgeInsets.fromLTRB(
                                               20.0,
@@ -1293,7 +1293,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ), //<-- SEE HERE
                                                   ),
                                               hintText:
-                                                  AppStrings.confirmPassword,
+                                                  AppStrings.confirmPassword.tr(),
                                               contentPadding:
                                                   const EdgeInsets.fromLTRB(
                                                     20.0,
@@ -1455,7 +1455,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             ), //<-- SEE HERE
                                                                           ),
                                                                           hintText:
-                                                                              AppStrings.currentPassword,
+                                                                              AppStrings.currentPassword.tr(),
                                                                           contentPadding: const EdgeInsets.fromLTRB(
                                                                             20.0,
                                                                             12.0,
@@ -1531,7 +1531,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             ), //<-- SEE HERE
                                                                           ),
                                                                           hintText:
-                                                                              AppStrings.newPassword,
+                                                                              AppStrings.newPassword.tr(),
                                                                           contentPadding: const EdgeInsets.fromLTRB(
                                                                             20.0,
                                                                             12.0,
@@ -1607,7 +1607,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             ), //<-- SEE HERE
                                                                           ),
                                                                           hintText:
-                                                                              AppStrings.confirmPassword,
+                                                                              AppStrings.confirmPassword.tr(),
                                                                           contentPadding: const EdgeInsets.fromLTRB(
                                                                             20.0,
                                                                             12.0,
@@ -1642,7 +1642,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               );
                                                                             },
                                                                             child: Text(
-                                                                              AppStrings.cancel,
+                                                                              AppStrings.cancel.tr(),
                                                                               style: const TextStyle(
                                                                                 fontFamily: 'Regular',
                                                                                 fontSize: 16,
@@ -1703,8 +1703,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                                                                     toast!.showToast(
                                                                                       child: Widgets().getSuccessToast(
-                                                                                        AppStrings.passwordSuccessfullyChanged,
-                                                                                      ),
+                                                                                        AppStrings.passwordSuccessfullyChanged.tr(),
+                                                                                        ),
                                                                                     );
                                                                                   } else {
                                                                                     log(
@@ -1717,7 +1717,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                                                                     toast!.showToast(
                                                                                       child: Widgets().getWarningToast(
-                                                                                        AppStrings.passwordDoesNotMatch,
+                                                                                        AppStrings.passwordDoesNotMatch.tr(),
                                                                                       ),
                                                                                     );
                                                                                   }
@@ -1729,7 +1729,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                                                                   toast!.showToast(
                                                                                     child: Widgets().getWarningToast(
-                                                                                      AppStrings.newOrConfirmPasswordIsBlank,
+                                                                                      AppStrings.newOrConfirmPasswordIsBlank.tr(),
                                                                                     ),
                                                                                     toastDuration: const Duration(
                                                                                       seconds: 3,
@@ -1746,7 +1746,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                                 ).pop();
                                                                                 toast!.showToast(
                                                                                   child: Widgets().getWarningToast(
-                                                                                    AppStrings.currentPasswordNotCorrect,
+                                                                                    AppStrings.currentPasswordNotCorrect.tr(),
                                                                                   ),
                                                                                 );
                                                                               }
@@ -1756,7 +1756,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               currentPwController.clear();
                                                                             },
                                                                             child: Text(
-                                                                              AppStrings.ok,
+                                                                              AppStrings.ok.tr(),
                                                                               style: const TextStyle(
                                                                                 fontFamily: 'Regular',
                                                                                 fontSize: 16,
@@ -1777,7 +1777,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     );
                                                   },
                                                   child: Text(
-                                                    AppStrings.change,
+                                                    AppStrings.change.tr(),
                                                     style: TextStyle(
                                                       fontFamily: 'Regular',
                                                       fontSize: 16,
@@ -1796,7 +1796,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   Navigator.pop(context);
                                                 },
                                                 child: Text(
-                                                  AppStrings.cancel,
+                                                  AppStrings.cancel.tr(),
                                                   style: const TextStyle(
                                                     fontFamily: 'Regular',
                                                     fontSize: 16,
@@ -1826,7 +1826,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       toast!.showToast(
                                                         child: Widgets()
                                                             .getWarningToast(
-                                                              AppStrings.passwordDoesNotMatch,
+                                                              AppStrings
+                                                                  .passwordDoesNotMatch.tr(),
                                                             ),
                                                         gravity:
                                                             ToastGravity.BOTTOM,
@@ -1868,7 +1869,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       toast!.showToast(
                                                         child: Widgets()
                                                             .getWarningToast(
-                                                              AppStrings.invalidPassword,
+                                                              AppStrings
+                                                                  .invalidPassword.tr(),
                                                             ),
                                                         gravity:
                                                             ToastGravity.BOTTOM,
@@ -1884,8 +1886,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 },
                                                 child: Text(
                                                   createPassword
-                                                      ? AppStrings.create
-                                                      : AppStrings.submit,
+                                                      ? AppStrings.create.tr()
+                                                      : AppStrings.submit.tr(),
                                                   style: const TextStyle(
                                                     fontFamily: 'Regular',
                                                     fontSize: 16,
@@ -1909,19 +1911,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
                 child: Card(
-                  color: Colors.purple[100]!,
+                  color: const Color(0xff7ad3ff),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          'assets/imgs/slip2.png',
-                          width: 40,
-                          height: 40,
-                        ),
+                        Image.asset('assets/imgs/4.png', width: 45, height: 45),
                         Text(
-                          AppStrings.paySlip,
+                          AppStrings.paySlip.tr(),
                           style: const TextStyle(fontSize: 12),
                         ),
                         ValueListenableBuilder(
@@ -1946,14 +1944,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const AttendanceScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => const AttendanceScreen(),
+                    ),
                   );
                 },
                 child: _buildAttendanceItem(
                   'assets/imgs/5.png',
-                  AppStrings.attendance,
+                  AppStrings.attendance.tr(),
                   attendanceCount.toString(),
-                  Colors.red[100]!,
+                  const Color(0xffd9d8ff),
                   42,
                   42,
                 ),
@@ -1961,12 +1961,12 @@ class _HomeScreenState extends State<HomeScreen> {
               GestureDetector(
                 onTap: () {},
                 child: _buildAttendanceItem(
-                  'assets/imgs/2.png',
-                  AppStrings.overtime,
+                  'assets/imgs/3.png',
+                  AppStrings.overtime.tr(),
                   overtimeCount.toString(),
-                  Colors.orange[100]!,
-                  38,
-                  38,
+                  const Color(0xff9999ff),
+                  45,
+                  45,
                 ),
               ),
             ],

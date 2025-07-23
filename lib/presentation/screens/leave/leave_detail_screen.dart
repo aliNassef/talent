@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -135,7 +136,7 @@ class LeaveDetailScreenState extends State<LeaveDetailScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: style.ColorObj.mainColor,
-          title: Text(AppStrings.myLeaveHistoryDetail),
+          title: Text(AppStrings.myLeaveHistoryDetail.tr()),
           leading: InkWell(
             onTap: () async {
               await Navigator.of(context).pushReplacement(
@@ -169,7 +170,7 @@ class LeaveDetailScreenState extends State<LeaveDetailScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(AppStrings.type, style: normalMediumGreyText),
+                                Text(AppStrings.type.tr(), style: normalMediumGreyText),
                                 const SizedBox(height: 15),
                                 Text(
                                   // ignore: unnecessary_null_comparison
@@ -230,7 +231,7 @@ class LeaveDetailScreenState extends State<LeaveDetailScreen> {
                             Expanded(
                               flex: 1,
                               child: Text(
-                                AppStrings.leaveReason,
+                                AppStrings.leaveReason.tr(),
                                 style: normalLargeGreyText,
                               ),
                             ),
@@ -253,7 +254,7 @@ class LeaveDetailScreenState extends State<LeaveDetailScreen> {
                             Expanded(
                               flex: 1,
                               child: Text(
-                                AppStrings.duration,
+                                AppStrings.duration.tr(),
                                 style: normalLargeGreyText,
                               ),
                             ),

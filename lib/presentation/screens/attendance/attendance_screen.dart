@@ -290,7 +290,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
             },
             child: const Icon(Icons.home),
           ),
-          title: Text(AppStrings.attendance, style: appBarTitleStyle),
+          title: Text(AppStrings.attendance.tr(), style: appBarTitleStyle),
           backgroundColor: style.ColorObj.mainColor,
           actions: [
             Padding(
@@ -304,7 +304,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                 children: [
                   InkWell(
                     onTap: () async {
-                      EasyLoading.show(status: AppStrings.gettingCurrentLocation);
+                      EasyLoading.show(status: AppStrings.gettingCurrentLocation.tr());
 
                       bool hasGPSPermission = false;
 
@@ -318,7 +318,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                       if (!hasGPSPermission) {
                         toast?.showToast(
                           child: Widgets().getWarningToast(
-                            AppStrings.youAreNotAllowedToCheckInOutFromThisLocation,
+                            AppStrings.youAreNotAllowedToCheckInOutFromThisLocation.tr(),
                           ),
                           gravity: ToastGravity.BOTTOM,
                           toastDuration: const Duration(seconds: 3),
@@ -362,7 +362,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                         attList = [];
                         noMoreToShow = false;
                       });
-                      EasyLoading.show(status: AppStrings.fetchingData);
+                      EasyLoading.show(status: AppStrings.fetchingData.tr());
                       refreshList();
                     },
                     child: const Padding(
@@ -399,7 +399,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                                   Expanded(
                                     flex: 4,
                                     child: Text(
-                                      AppStrings.today,
+                                      AppStrings.today.tr(),
                                       textAlign: TextAlign.left,
                                       style: listRow1TextStyle,
                                     ),
@@ -434,7 +434,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                                   Expanded(
                                     flex: 4,
                                     child: Text(
-                                      AppStrings.thisWeek,
+                                      AppStrings.thisWeek.tr(),
                                       textAlign: TextAlign.left,
                                       style: listRow1TextStyle,
                                     ),
@@ -470,7 +470,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                                   Expanded(
                                     flex: 4,
                                     child: Text(
-                                      AppStrings.thisMonth,
+                                      AppStrings.thisMonth.tr(),
                                       textAlign: TextAlign.left,
                                       style: listRow1TextStyle,
                                     ),
@@ -505,7 +505,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                                   Expanded(
                                     flex: 4,
                                     child: Text(
-                                      AppStrings.lastWeek,
+                                      AppStrings.lastWeek.tr(),
                                       textAlign: TextAlign.left,
                                       style: listRow1TextStyle,
                                     ),
@@ -540,7 +540,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                                   Expanded(
                                     flex: 4,
                                     child: Text(
-                                      AppStrings.custom,
+                                      AppStrings.custom.tr(),
                                       textAlign: TextAlign.left,
                                       style: listRow1TextStyle,
                                     ),
@@ -581,7 +581,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                             ),
 
                             child: Text(
-                              AppStrings.date,
+                              AppStrings.date.tr(),
                               textAlign: TextAlign.center,
                               style: style.tableHeadingStyle2,
                             ),
@@ -603,7 +603,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: Text(
-                                AppStrings.checkIn,
+                                AppStrings.checkIn.tr(),
                               textAlign: TextAlign.center,
                               style: style.tableHeadingStyle2,
                             ),
@@ -625,7 +625,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: Text(
-                              AppStrings.checkOut,
+                              AppStrings.checkOut.tr(),
                               textAlign: TextAlign.center,
                               style: style.tableHeadingStyle2,
                             ),
@@ -648,7 +648,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                             ),
 
                             child: Text(
-                              AppStrings.hours,
+                              AppStrings.hours.tr(),
                               textAlign: TextAlign.center,
                               style: style.tableHeadingStyle2,
                             ),
@@ -774,10 +774,10 @@ class AttendanceScreenState extends State<AttendanceScreen> {
           width: double.infinity,
           child: attList.isNotEmpty
               ? Text(
-                  '${attList.length} ${AppStrings.recordsFound}',
+                  '${attList.length} ${AppStrings.recordsFound.tr()}',
                   style: normalMediumGreyText,
                 )
-              : Text(AppStrings.zeroRecordsFound, style: normalMediumGreyText),
+              : Text(AppStrings.zeroRecordsFound.tr(), style: normalMediumGreyText),
         ),
       ),
     );
@@ -848,7 +848,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                           Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Text(
-                              AppStrings.chooseDate,
+                              AppStrings.chooseDate.tr(),
                               style: const TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
@@ -879,7 +879,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                             height: MediaQuery.of(context).size.height * 0.06,
                             child: TimePickerWidget(
                               //edit border radius in library
-                              text: AppStrings.startDate,
+                              text: AppStrings.startDate.tr(),
                               timePicker: (t) {
                                 setState(() {
                                   startTime = t;
@@ -897,7 +897,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                             child: SizedBox(
                               height: MediaQuery.of(context).size.height * 0.05,
                               child: Text(
-                                AppStrings.to,
+                                AppStrings.to.tr(),
                                 style: const TextStyle(
                                   fontSize: 15,
                                   color: ColorObj.textColor,
@@ -915,7 +915,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                             margin: const EdgeInsets.symmetric(horizontal: 6),
                             height: MediaQuery.of(context).size.height * 0.06,
                             child: TimePickerWidget(
-                              text: AppStrings.endDate,
+                              text: AppStrings.endDate.tr(),
                               timePicker: (t) {
                                 setState(() {
                                   endTime = t;
@@ -925,9 +925,9 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                                       context: context,
                                       builder: (context) {
                                         return ErrorDialog(
-                                          title: AppStrings.endDateSelectError,
+                                          title: AppStrings.endDateSelectError.tr(),
                                           content: Text(  
-                                            AppStrings.pleaseSelectCorrectEndDate,
+                                            AppStrings.pleaseSelectCorrectEndDate.tr(),
                                             style: const TextStyle(
                                               color: ColorObj.textColor,
                                               fontSize: 15,
@@ -965,7 +965,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                                 refreshList();
                               },
                               child: Text(
-                                AppStrings.cancel,
+                                AppStrings.cancel.tr(),
                                 style: const TextStyle(
                                   color: Colors.red,
                                   fontSize: 16,
@@ -982,7 +982,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                                 if (selectTime == false) {
                                   toast!.showToast(
                                     child: Widgets().getWarningToast(
-                                      AppStrings.pleaseSelectStartDate,
+                                      AppStrings.pleaseSelectStartDate.tr(),
                                     ),
                                     gravity: ToastGravity.BOTTOM,
                                     toastDuration: const Duration(seconds: 2),
@@ -992,7 +992,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                                 if (totalDays <= 0) {
                                   toast!.showToast(
                                     child: Widgets().getWarningToast(
-                                      AppStrings.pleaseSelectValidDate,
+                                      AppStrings.pleaseSelectValidDate.tr(),
                                     ),
                                     gravity: ToastGravity.BOTTOM,
                                     toastDuration: const Duration(seconds: 2),
@@ -1006,7 +1006,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                                 }
                               },
                               child: Text(
-                                AppStrings.confirm,
+                                AppStrings.confirm.tr(),
                                 style: const TextStyle(
                                   color: Colors.green,
                                   fontSize: 16,

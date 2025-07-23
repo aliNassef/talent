@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -196,14 +197,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return RejectScreen();
+            return const RejectScreen();
           },
         ),
       );
     } else if (deviceState == 'Invalid cookie.') {
       toast!.showToast(
         child: Widgets().getErrorToast(
-          AppStrings.sessionExpiredPleaseLoginAgain,
+          AppStrings.sessionExpiredPleaseLoginAgain.tr(),
         ),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 3),

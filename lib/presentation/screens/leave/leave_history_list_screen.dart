@@ -115,7 +115,7 @@ class LeaveHistoryListScreenState extends State<LeaveHistoryListScreen> {
       showDialog(context: context, builder: (_) => CustomEventDialog());
       return;
     }
-    EasyLoading.show(status: AppStrings.fetchingData);
+    EasyLoading.show(status: AppStrings.fetchingData.tr());
     doneRefresh = true;
     setState(() {});
 
@@ -152,7 +152,7 @@ class LeaveHistoryListScreenState extends State<LeaveHistoryListScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: style.ColorObj.mainColor,
-          title: Text(AppStrings.myLeaveHistory, style: style.appBarTitleStyle),
+          title: Text(AppStrings.myLeaveHistory.tr(), style: style.appBarTitleStyle),
           leading: InkWell(
             onTap: () {
               Navigator.pushReplacement(
@@ -253,10 +253,10 @@ class LeaveHistoryListScreenState extends State<LeaveHistoryListScreen> {
           width: double.infinity,
           child: leaveList.isNotEmpty
               ? Text(
-                  '${leaveList.length} ${AppStrings.recordsFound}',
+                  '${leaveList.length} ${AppStrings.recordsFound.tr()}',
                   style: normalMediumGreyText,
                 )
-              : Text(AppStrings.zeroRecordsFound, style: normalMediumGreyText),
+              : Text(AppStrings.zeroRecordsFound.tr(), style: normalMediumGreyText),
         ),
         floatingActionButton: SpeedDial(
           animatedIcon: AnimatedIcons.menu_close,
@@ -265,7 +265,7 @@ class LeaveHistoryListScreenState extends State<LeaveHistoryListScreen> {
             SpeedDialChild(
               backgroundColor: ColorObj.mainColor,
               child: Icon(MdiIcons.calendarAccount, color: Colors.white),
-              label: AppStrings.newLeaveRequest,
+              label: AppStrings.newLeaveRequest.tr(),
               onTap: () => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(

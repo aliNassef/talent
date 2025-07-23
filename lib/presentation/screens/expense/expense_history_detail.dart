@@ -118,7 +118,7 @@ class _ExpenseHistoryDetailScreenState
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: style.ColorObj.mainColor,
-          title: Text(AppStrings.expenseHistoryDetail, style: appBarTitleStyle),
+          title: Text(AppStrings.expenseHistoryDetail.tr(), style: appBarTitleStyle),
           leading: InkWell(
             onTap: () async {
               await Navigator.pushReplacementNamed(context, '/expense');
@@ -148,7 +148,7 @@ class _ExpenseHistoryDetailScreenState
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  AppStrings.expenseProduct,
+                                  AppStrings.expenseProduct.tr(),
                                   style: normalMediumGreyText,
                                 ),
                                 const SizedBox(height: 15),
@@ -207,7 +207,7 @@ class _ExpenseHistoryDetailScreenState
                             Expanded(
                               flex: 1,
                               child: Text(
-                                AppStrings.description,
+                                AppStrings.description.tr(),
                                 style: normalLargeGreyText,
                               ),
                             ),
@@ -227,7 +227,7 @@ class _ExpenseHistoryDetailScreenState
                             Expanded(
                               flex: 1,
                               child: Text(
-                                AppStrings.amount,
+                                AppStrings.amount.tr(),
                                 style: normalLargeGreyText,
                               ),
                             ),
@@ -247,7 +247,7 @@ class _ExpenseHistoryDetailScreenState
                             Expanded(
                               flex: 1,
                               child: Text(
-                                AppStrings.paidBy,
+                                AppStrings.paidBy.tr()  ,
                                 style: normalLargeGreyText,
                               ),
                             ),
@@ -255,8 +255,8 @@ class _ExpenseHistoryDetailScreenState
                               flex: 1,
                               child: Text(
                                 expense.paidBy == 'own_account'
-                                    ? AppStrings.employeeToReimburse
-                                    : AppStrings.company,
+                                    ? AppStrings.employeeToReimburse.tr()
+                                    : AppStrings.company.tr(),
                                 style: normalLargeBalckText,
                               ),
                             ),
@@ -269,7 +269,7 @@ class _ExpenseHistoryDetailScreenState
                             Expanded(
                               flex: 1,
                               child: Text(
-                                AppStrings.note,
+                                AppStrings.note.tr(),
                                 style: normalLargeGreyText,
                               ),
                             ),

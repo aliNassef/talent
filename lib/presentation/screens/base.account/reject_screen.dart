@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:talent/utility/share/app_strings.dart';
 
@@ -32,7 +33,7 @@ class _RejectScreenState extends State<RejectScreen> {
               height: 50,
             ),
             Text(
-              AppStrings.accessDenied,
+              AppStrings.accessDenied.tr(),
               style: const TextStyle(
                 color: Colors.red,
                 fontSize: 40,
@@ -43,7 +44,7 @@ class _RejectScreenState extends State<RejectScreen> {
               height: 10,
             ),
             Text(
-              AppStrings.youDontHaveAccess,
+              AppStrings.youDontHaveAccess.tr(),
               style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 18,
@@ -53,7 +54,7 @@ class _RejectScreenState extends State<RejectScreen> {
               height: 5,
             ),
             Text(
-              AppStrings.youDontHaveAccess,
+              AppStrings.youDontHaveAccess.tr(),
               style: const TextStyle(color: Colors.grey, fontSize: 18),
             ),
           ],

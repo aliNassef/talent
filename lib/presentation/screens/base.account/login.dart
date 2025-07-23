@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -231,7 +232,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  AppStrings.welcome,
+                  AppStrings.welcome.tr(),  
                   style: const TextStyle(
                     color: style.ColorObj.loginBackgroundColor,
                     fontWeight: FontWeight.bold,
@@ -299,7 +300,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               focusNode: _nameF,
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return AppStrings.pleaseEnterUsername;
+                                  return AppStrings.pleaseEnterUsername.tr();
                                 }
                                 return null;
                               },
@@ -307,7 +308,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               cursorColor: Colors.grey,
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.person),
-                                hintText: AppStrings.username,
+                                hintText: AppStrings.username.tr(),
                                 border: const OutlineInputBorder(),
                                 contentPadding: const EdgeInsets.only(
                                   bottom: 25,
@@ -323,7 +324,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               cursorColor: Colors.grey,
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return AppStrings.pleaseEnterPassword;
+                                  return AppStrings.pleaseEnterPassword.tr();
                                 }
                                 return null;
                               },
@@ -331,7 +332,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               obscureText: _obscureText,
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.lock),
-                                hintText: AppStrings.password,
+                                hintText: AppStrings.password.tr()  ,
                                 suffixIcon: IconButton(
                                   icon: _obscureText
                                       ? const Icon(Icons.remove_red_eye)
@@ -395,7 +396,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 borderRadius: BorderRadius.circular(15.0),
                               ),
                               child: Text(
-                                AppStrings.login,
+                                AppStrings.login.tr(),
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16.0,

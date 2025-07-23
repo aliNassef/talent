@@ -246,7 +246,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: style.ColorObj.mainColor,
-          title: Text(AppStrings.newLeaveRequest, style: style.appBarTitleStyle),
+          title: Text(AppStrings.newLeaveRequest.tr(), style: style.appBarTitleStyle),
           leading: InkWell(
             onTap: () {
               Navigator.pushReplacement(
@@ -458,7 +458,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
                                           SizedBox(
                                             width: 29,
                                             child: Text(
-                                              AppStrings.to,
+                                              AppStrings.to.tr(),
                                               textAlign: TextAlign.center,
                                               style: normalMediumGreyText,
                                             ),
@@ -589,7 +589,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
                                                     ),
                                                 isExpanded: true,
                                                 hint: Text(
-                                                  AppStrings.selectDayType,
+                                                  AppStrings.selectDayType.tr(),
                                                   style: normalMediumGreyText,
                                                   overflow:
                                                       TextOverflow.ellipsis,
@@ -637,7 +637,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
                                           },
                                         ),
                                         Text(
-                                          '${AppStrings.halfDay}',
+                                          '${AppStrings.halfDay.tr()}',
                                           style: normalMediumGreyText,
                                         ),
                                       ],
@@ -656,7 +656,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
                                               Expanded(
                                                 ///flex: 2,
                                                 child: Text(
-                                                  '${AppStrings.duration} :',
+                                                  '${AppStrings.duration.tr()} :',
                                                   style: normalMediumGreyText,
                                                 ),
                                               ),
@@ -693,7 +693,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
                                   maxLines: 6,
                                   style: normalMediumBalckText,
                                   decoration: InputDecoration.collapsed(
-                                    hintText: AppStrings.reason,
+                                    hintText: AppStrings.reason.tr(),
                                     hintStyle: normalMediumGreyText,
                                   ),
                                 ),
@@ -718,7 +718,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
                                 ),
                                 onPressed: _submitRequest,
                                 child: Text(
-                                  AppStrings.submitRequest,
+                                  AppStrings.submitRequest.tr(),
                                   style: normalLargeWhiteText,
                                 ),
                               ),
@@ -740,7 +740,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
                                     ),
                                     const SizedBox(width: 10),
                                     Text(
-                                      AppStrings.attachmentForMedicalLeave,
+                                      AppStrings.attachmentForMedicalLeave.tr(),
                                       style: style.normalMediumBalckText,
                                     ),
                                   ],
@@ -780,7 +780,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
     if (_isHalfDay == true) {
       if (_selectedDay == '' || _selectedDay == null) {
         toast!.showToast(
-          child: Widgets().getWarningToast(AppStrings.pleaseSelectDayType),
+          child: Widgets().getWarningToast(AppStrings.pleaseSelectDayType.tr()),
           gravity: ToastGravity.BOTTOM,
           toastDuration: const Duration(seconds: 2),
         );
@@ -789,7 +789,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
     }
     if (_selectedLeaveType == null) {
       toast!.showToast(
-        child: Widgets().getWarningToast(AppStrings.pleaseSelectLeaveType),
+        child: Widgets().getWarningToast(AppStrings.pleaseSelectLeaveType.tr()),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 2),
       );
@@ -798,7 +798,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
 
     if (_reasonController.text == '') {
       toast!.showToast(
-        child: Widgets().getWarningToast(AppStrings.pleaseEnterReason),
+        child: Widgets().getWarningToast(AppStrings.pleaseEnterReason.tr()),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 2),
       );
@@ -807,7 +807,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
 
     if (noOfDay! <= 0) {
       toast!.showToast(
-        child: Widgets().getWarningToast(AppStrings.pleaseSelectValidDate),
+        child: Widgets().getWarningToast(AppStrings.pleaseSelectValidDate.tr()),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 2),
       );
@@ -867,7 +867,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
       monthName,
       year,
     );
-    EasyLoading.show(status: AppStrings.submittingPleaseWait);
+    EasyLoading.show(status: AppStrings.submittingPleaseWait.tr());
 
     var createResult = await leaveApi.createLeaveRequest(leave);
 
@@ -884,7 +884,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
           EasyLoading.dismiss();
           toast!.showToast(
             child: Widgets().getErrorToast(
-              AppStrings.sessionExpiredPleaseLoginAgain,
+              AppStrings.sessionExpiredPleaseLoginAgain.tr(),
             ),
             gravity: ToastGravity.BOTTOM,
             toastDuration: const Duration(seconds: 3),
@@ -909,7 +909,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
       log('resultMessage---------$resultMessage');
       EasyLoading.dismiss();
       toast!.showToast(
-        child: Widgets().getErrorToast('$resultMessage'),
+        child: Widgets().getErrorToast(resultMessage.tr()),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 5),
       );
@@ -919,7 +919,7 @@ class LeaveRequestScreenState extends State<LeaveRequestScreen> {
     EasyLoading.dismiss();
 
     toast!.showToast(
-      child: Widgets().getSuccessToast(AppStrings.requestSuccessfullyCreated),
+      child: Widgets().getSuccessToast(AppStrings.requestSuccessfullyCreated.tr()),
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 2),
     );

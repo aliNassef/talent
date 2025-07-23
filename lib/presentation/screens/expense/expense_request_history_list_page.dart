@@ -198,7 +198,7 @@ class _ExpenseListPageState extends State<ExpenseListPage> {
             },
             child: const Icon(Icons.home),
           ),
-          title: Text(AppStrings.expenseHistoryList, style: appBarTitleStyle),
+          title: Text(AppStrings.expenseHistoryList.tr(), style: appBarTitleStyle),
           backgroundColor: ColorObj.mainColor,
           actions: [
             IgnorePointer(
@@ -279,16 +279,16 @@ class _ExpenseListPageState extends State<ExpenseListPage> {
             SpeedDialChild(
               backgroundColor: ColorObj.mainColor,
               child: const Icon(Icons.add, color: Colors.white),
-              label: AppStrings.newExpense,
+              label: AppStrings.newExpense.tr(),
               onTap: () => Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => ExpenseEntryPage()),
+                MaterialPageRoute(builder: (context) => const ExpenseEntryPage()),
               ),
             ),
             SpeedDialChild(
               backgroundColor: ColorObj.mainColor,
               child: Icon(MdiIcons.cash, color: Colors.white),
-              label: AppStrings.expenseHistoryList,
+              label: AppStrings.expenseHistoryList.tr(),
               onTap: () => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const ExpenseListPage()),
@@ -305,10 +305,10 @@ class _ExpenseListPageState extends State<ExpenseListPage> {
           width: double.infinity,
           child: expenseList.isNotEmpty
               ? Text(
-                  '${expenseList.length} ${AppStrings.recordsFound}',
+                  '${expenseList.length} ${AppStrings.recordsFound.tr()}',
                   style: normalMediumGreyText,
                 )
-              : Text(AppStrings.zeroRecordsFound,
+              : Text(AppStrings.zeroRecordsFound.tr(),
                   style: normalMediumGreyText),
         ),
       ),

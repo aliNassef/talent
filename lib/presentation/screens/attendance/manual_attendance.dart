@@ -144,9 +144,9 @@ class ManualAttendanceState extends State<ManualAttendance> {
     _isCheckIn = pref.getBool('is_check_in');
 
     if (_isCheckIn == null || _isCheckIn!) {
-      checkInStr = AppStrings.checkIn;
+      checkInStr = AppStrings.checkIn.tr();
     } else {
-      checkInStr = AppStrings.checkOut;
+      checkInStr = AppStrings.checkOut.tr();
     }
   }
 
@@ -302,7 +302,7 @@ class ManualAttendanceState extends State<ManualAttendance> {
                                           MainAxisAlignment.spaceAround,
                                       children: [
                                         Text(
-                                          AppStrings.time,
+                                          AppStrings.time.tr(),
                                           style: boldXLGreyText,
                                         ),
 
@@ -393,7 +393,7 @@ class ManualAttendanceState extends State<ManualAttendance> {
                                   cursorColor: Colors.grey,
                                   maxLines: 4,
                                   decoration: InputDecoration(
-                                    hintText: AppStrings.reasonDetail,
+                                    hintText: AppStrings.reasonDetail.tr(),
                                     hintStyle: normalSmallGreyText,
                                     border: InputBorder.none,
                                   ),
@@ -425,7 +425,7 @@ class ManualAttendanceState extends State<ManualAttendance> {
                                 await _sendAttendance();
                               },
                               child: Text(
-                                AppStrings.submit,
+                                AppStrings.submit.tr(),
                                 style: normalLargeWhiteText,
                               ),
                             ),
@@ -483,7 +483,7 @@ class ManualAttendanceState extends State<ManualAttendance> {
 
     if (reasonController.text == '') {
       toast!.showToast(
-        child: Widgets().getWarningToast(AppStrings.pleaseEnterReason),
+        child: Widgets().getWarningToast(AppStrings.pleaseEnterReason.tr()),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 2),
       );
@@ -504,7 +504,7 @@ class ManualAttendanceState extends State<ManualAttendance> {
         EasyLoading.show(status: '................');
         EasyLoading.dismiss();
         toast!.showToast(
-          child: Widgets().getWarningToast(AppStrings.todayAlreadyCheckIn),
+          child: Widgets().getWarningToast(AppStrings.todayAlreadyCheckIn.tr()),
           gravity: ToastGravity.BOTTOM,
           toastDuration: const Duration(seconds: 2),
         );
@@ -621,7 +621,7 @@ class ManualAttendanceState extends State<ManualAttendance> {
       EasyLoading.dismiss();
 
       toast!.showToast(
-        child: Widgets().getErrorToast(AppStrings.todayAlreadyCheckIn),
+        child: Widgets().getErrorToast(AppStrings.todayAlreadyCheckIn.tr()),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 2),
       );
@@ -630,7 +630,7 @@ class ManualAttendanceState extends State<ManualAttendance> {
 
     // ignore: prefer_typing_uninitialized_variables
     var checkInResult;
-    EasyLoading.show(status: AppStrings.submittingPleaseWait);
+    EasyLoading.show(status: AppStrings.submittingPleaseWait.tr());
 
     if (_isCheckIn!) {
       checkInResult = await attendanceApi.createAttendance(attendance, '');
@@ -645,14 +645,14 @@ class ManualAttendanceState extends State<ManualAttendance> {
       var message;
 
       if (checkInResult['attendanceMessage'] == '') {
-        message = AppStrings.checkInFail;
+        message = AppStrings.checkInFail.tr();
       } else {
         message = checkInResult['attendanceMessage'];
         if (message == 'Invalid cookie.') {
           EasyLoading.dismiss();
           toast!.showToast(
             child: Widgets().getErrorToast(
-              AppStrings.sessionExpiredPleaseLoginAgain,
+              AppStrings.sessionExpiredPleaseLoginAgain.tr(),
             ),
             gravity: ToastGravity.BOTTOM,
             toastDuration: const Duration(seconds: 3),
@@ -690,7 +690,7 @@ class ManualAttendanceState extends State<ManualAttendance> {
     if (status == 'exist') {
       toast!.showToast(
         child: Widgets().getErrorToast(
-          AppStrings.attendanceDateIsAlreadyExistInTheSystem,
+          AppStrings.attendanceDateIsAlreadyExistInTheSystem.tr(),
         ),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 3),
@@ -713,7 +713,7 @@ class ManualAttendanceState extends State<ManualAttendance> {
       );
 
       toast!.showToast(
-        child: Widgets().getSuccessToast(AppStrings.checkInSuccessful),
+        child: Widgets().getSuccessToast(AppStrings.checkInSuccessful.tr()),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 3),
       );
@@ -733,7 +733,7 @@ class ManualAttendanceState extends State<ManualAttendance> {
         lastAttCheckDate,
       );
       toast!.showToast(
-        child: Widgets().getSuccessToast(AppStrings.checkOutSuccessful),
+        child: Widgets().getSuccessToast(AppStrings.checkOutSuccessful.tr()),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 3),
       );

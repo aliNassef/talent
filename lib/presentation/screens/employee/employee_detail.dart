@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -131,6 +132,7 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                           fontSize: 16.0,
                         ),
                       ),
+
                       InkWell(
                         onTap: () async {
                           bool checkInternet = await InternetConnectionChecker
@@ -145,7 +147,7 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                             return;
                           }
                           EasyLoading.show(
-                            status: AppStrings.fetchingUpdateData,
+                            status: AppStrings.fetchingUpdateData.tr(),
                           );
                           var employeeApi = EmployeeAPI();
                           await employeeApi.getEmployeeList();
@@ -181,7 +183,6 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
             children: <Widget>[
               ListTile(
                 dense: true,
-
                 visualDensity: const VisualDensity(vertical: -2), // to compact
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -205,7 +206,10 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                     ),
                   ],
                 ),
-                title: Text(AppStrings.registrationNumber, style: normalSmallGreyText),
+                title: Text(
+                  AppStrings.registrationNumber.tr(),
+                  style: normalSmallGreyText,
+                ),
                 subtitle: Text(
                   employee != null ? employee!.employee_code.toString() : '',
                   style: normalMediumBalckText,
@@ -221,7 +225,7 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                     ),
                   ],
                 ),
-                title: Text(AppStrings.gender, style: normalSmallGreyText),
+                title: Text(AppStrings.gender.tr(), style: normalSmallGreyText),
                 subtitle: Text(
                   employee != null ? employee!.gender.toString() : '',
                   style: normalMediumBalckText,
@@ -234,7 +238,7 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                     Icon(MdiIcons.cakeVariant, color: const Color(0xff208d9c)),
                   ],
                 ),
-                title: Text(AppStrings.birthday, style: normalSmallGreyText),
+                title: Text(AppStrings.birthday.tr(), style: normalSmallGreyText),
                 subtitle: Text(
                   employee != null ? employee!.birthday.toString() : '',
                   style: normalMediumBalckText,
@@ -247,7 +251,7 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                     Icon(MdiIcons.phone, color: const Color(0xff208d9c)),
                   ],
                 ),
-                title: Text(AppStrings.work, style: normalSmallGreyText),
+                title: Text(AppStrings.work.tr( ), style: normalSmallGreyText),
                 subtitle: Text(
                   employee != null ? employee!.work_phone! : '',
                   style: normalMediumBalckText,
@@ -262,7 +266,7 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                     Icon(MdiIcons.phone, color: const Color(0xff208d9c)),
                   ],
                 ),
-                title: Text(AppStrings.home, style: normalSmallGreyText),
+                title: Text(AppStrings.home.tr(), style: normalSmallGreyText),
                 subtitle: Text(
                   employee != null ? employee!.mobile_phone! : '',
                   style: normalMediumBalckText,
@@ -275,10 +279,34 @@ class EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                     Icon(MdiIcons.email, color: const Color(0xff208d9c)),
                   ],
                 ),
-                title: Text(AppStrings.workEmail, style: normalSmallGreyText),
+                title: Text(AppStrings.workEmail.tr(), style: normalSmallGreyText),
                 subtitle: Text(
                   employee != null ? employee!.email.toString() : '',
                   style: normalMediumBalckText,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: InkWell(
+                  onTap: () async {
+                    final currentLocale = context.locale;
+                    if (currentLocale.languageCode == 'ar') {
+                      await context.setLocale(const Locale('en'));
+                    } else {
+                      await context.setLocale(const Locale('ar'));
+                    }
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.language,
+                        color: Color(0xff208d9c),
+                        size: 25,
+                      ),
+                      const SizedBox(width: 20),
+                      Text(AppStrings.changeLang.tr(), style: normalMediumBalckText),
+                    ],
+                  ),
                 ),
               ),
             ],

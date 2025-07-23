@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Config {
@@ -5,7 +7,7 @@ class Config {
   static const database = 'odoozaly-sanid-main-19183474'; //internal_hr_uat_
 
   static loadConfigInfo() async {
-    print('loadConfigInfo---------');
+    log('loadConfigInfo---------');
     var pref = await SharedPreferences.getInstance();
     var urlVar = pref.getString('url');
     var databaseVar = pref.getString('database');

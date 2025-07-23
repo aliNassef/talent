@@ -23,7 +23,7 @@ class loginAPI {
     database = 'odoozaly-sanid-main-19183474';
     String? loginResult;
 
-    var url1 = Uri.parse('https://sanidsa.odoo.com/api/auth');
+    var url1 = Uri.parse(urlLink);
 
     final body = {
       'username': username,
@@ -36,7 +36,7 @@ class loginAPI {
       }),
     };
 
-    log('loginAPI URL: $url1');
+    log('loginAPI URL: $urlLink');
     log(
       'loginAPI: $username, $password, $deviceId, $deviceImei, $deviceName, $deviceModel',
     ); 

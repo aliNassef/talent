@@ -229,7 +229,7 @@ class LeaveDashBoardScreenState extends State<LeaveDashBoardScreen>
             child: const Icon(Icons.home),
           ),
           backgroundColor: style.ColorObj.mainColor,
-          title: Text(AppStrings.leaveDashboard, style: style.appBarTitleStyle),
+          title: Text(AppStrings.leaveDashboard.tr(), style: style.appBarTitleStyle),
           actions: [
             IgnorePointer(
               ignoring: doneRefresh,
@@ -485,7 +485,7 @@ class LeaveDashBoardScreenState extends State<LeaveDashBoardScreen>
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              AppStrings.remain,
+                              AppStrings.remain.tr(),
                               style: TextStyle(
                                 color: textColorList[index],
                                 fontSize: 14,
@@ -508,7 +508,7 @@ class LeaveDashBoardScreenState extends State<LeaveDashBoardScreen>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      AppStrings.used,
+                      AppStrings.used.tr(),
                       style: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                     Text(
@@ -520,7 +520,7 @@ class LeaveDashBoardScreenState extends State<LeaveDashBoardScreen>
                       ),
                     ),
                     Text(
-                      AppStrings.days,
+                      AppStrings.days.tr(),
                       style: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                   ],

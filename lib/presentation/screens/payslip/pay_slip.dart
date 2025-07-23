@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:talent/presentation/screens/payslip/pay_slip_list_page.dart';
@@ -83,7 +84,7 @@ class _PaySlipScreenState extends State<PaySlipScreen> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: ColorObj.mainColor,
-          title: Text(AppStrings.paySlip, style: const TextStyle(fontSize: 16)),
+          title: Text(AppStrings.paySlip.tr(), style: const TextStyle(fontSize: 16)),
         ),
         body: paySlipModel != null
             ? ListView.builder(
@@ -139,7 +140,7 @@ class _PaySlipScreenState extends State<PaySlipScreen> {
                                         bottom: 10,
                                       ),
                                       child: Text(
-                                        AppStrings.salarySlip,
+                                        AppStrings.salarySlip.tr(),
                                         style:
                                             boldXLBlackText, //boldLargeWhiteText
                                       ),
@@ -174,7 +175,7 @@ class _PaySlipScreenState extends State<PaySlipScreen> {
                                                 8.0,
                                               ),
                                               child: Text(
-                                                AppStrings.reference,
+                                                AppStrings.reference.tr(),
                                                 style: normalMediumBalckText,
                                               ),
                                             ),
@@ -231,7 +232,7 @@ class _PaySlipScreenState extends State<PaySlipScreen> {
                                                 8.0,
                                               ),
                                               child: Text(
-                                                AppStrings.employeeName,
+                                                AppStrings.employeeName.tr(),
                                                 style: normalMediumBalckText,
                                               ),
                                             ),
@@ -288,7 +289,7 @@ class _PaySlipScreenState extends State<PaySlipScreen> {
                                                 8.0,
                                               ),
                                               child: Text(
-                                                AppStrings.employeeCode,
+                                                AppStrings.employeeCode.tr(),
                                                 style: normalMediumBalckText,
                                               ),
                                             ),
@@ -345,7 +346,7 @@ class _PaySlipScreenState extends State<PaySlipScreen> {
                                                 8.0,
                                               ),
                                               child: Text(
-                                                AppStrings.department,
+                                                AppStrings.department.tr(),
                                                 style: normalMediumBalckText,
                                               ),
                                             ),
@@ -403,7 +404,7 @@ class _PaySlipScreenState extends State<PaySlipScreen> {
                                                 8.0,
                                               ),
                                               child: Text(
-                                                AppStrings.position,
+                                                AppStrings.position.tr(),
                                                 style: normalMediumBalckText,
                                               ),
                                             ),
@@ -458,7 +459,7 @@ class _PaySlipScreenState extends State<PaySlipScreen> {
                                         8.0,
                                       ), //0xff4682B4
                                       child: Text(
-                                        AppStrings.grossSalary,
+                                        AppStrings.grossSalary.tr(),
                                         style: boldLargeWhiteText,
                                       ),
                                     ),
@@ -568,7 +569,7 @@ class _PaySlipScreenState extends State<PaySlipScreen> {
                                                 8.0,
                                               ),
                                               child: Text(
-                                                AppStrings.grossEarning,
+                                                AppStrings.grossEarning.tr(),
                                                 style: boldMediumBlackText,
                                               ),
                                             ),
@@ -624,7 +625,7 @@ class _PaySlipScreenState extends State<PaySlipScreen> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        AppStrings.deduction,
+                                        AppStrings.deduction.tr(),
                                         style: boldLargeWhiteText,
                                       ),
                                     ),
@@ -730,7 +731,7 @@ class _PaySlipScreenState extends State<PaySlipScreen> {
                                                 8.0,
                                               ),
                                               child: Text(
-                                                AppStrings.grossDeduction,
+                                                AppStrings.grossDeduction.tr(),
                                                 style: boldMediumBlackText,
                                               ),
                                             ),
@@ -788,7 +789,7 @@ class _PaySlipScreenState extends State<PaySlipScreen> {
                                                 8.0,
                                               ),
                                               child: Text(
-                                                AppStrings.netAmount,
+                                                AppStrings.netAmount.tr(),
                                                 style: boldLargeBlackText,
                                               ),
                                             ),
