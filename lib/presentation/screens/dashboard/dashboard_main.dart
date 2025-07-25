@@ -1644,7 +1644,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             child: Text(
                                                                               AppStrings.cancel.tr(),
                                                                               style: const TextStyle(
-                                                                                fontFamily: 'Regular',
                                                                                 fontSize: 16,
                                                                                 color: Colors.red,
                                                                               ),
@@ -1758,8 +1757,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             child: Text(
                                                                               AppStrings.ok.tr(),
                                                                               style: const TextStyle(
-                                                                                fontFamily: 'Regular',
-                                                                                fontSize: 16,
+                                                                                 fontSize: 16,
                                                                                 color: ColorObj.mainColor,
                                                                               ),
                                                                             ),
@@ -1779,8 +1777,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   child: Text(
                                                     AppStrings.change.tr(),
                                                     style: TextStyle(
-                                                      fontFamily: 'Regular',
-                                                      fontSize: 16,
+                                                       fontSize: 16,
                                                       color:
                                                           ColorObj.greyColor7,
                                                     ),
@@ -1798,8 +1795,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 child: Text(
                                                   AppStrings.cancel.tr(),
                                                   style: const TextStyle(
-                                                    fontFamily: 'Regular',
-                                                    fontSize: 16,
+                                                     fontSize: 16,
                                                     color: Colors.red,
                                                   ),
                                                 ),
@@ -1889,8 +1885,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       ? AppStrings.create.tr()
                                                       : AppStrings.submit.tr(),
                                                   style: const TextStyle(
-                                                    fontFamily: 'Regular',
-                                                    fontSize: 16,
+                                                     fontSize: 16,
                                                     color: ColorObj.mainColor,
                                                   ),
                                                 ),

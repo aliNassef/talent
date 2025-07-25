@@ -244,8 +244,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                           selectedDate,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
-                            fontFamily: 'Regular',
-                            color: Color(0xff006ea5),
+                             color: Color(0xff006ea5),
                             fontSize: 16,
                           ),
                         ),

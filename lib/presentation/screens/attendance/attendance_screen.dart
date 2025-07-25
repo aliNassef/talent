@@ -683,7 +683,6 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                                       attList[i].date!,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        fontFamily: 'Regular',
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                         color: todayDate == attList[i].date
@@ -707,7 +706,6 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                                       attList[i].check_in_time!,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        fontFamily: 'Regular',
                                         fontSize: 14,
                                         color: todayDate == attList[i].date
                                             ? Colors.white
@@ -725,7 +723,6 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                                       attList[i].check_out_time!,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        fontFamily: 'Regular',
                                         fontSize: 14,
                                         color: todayDate == attList[i].date
                                             ? Colors.white
@@ -743,7 +740,6 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                                       attList[i].working_hr!.toString(),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        fontFamily: 'Regular',
                                         fontSize: 14,
                                         color: todayDate == attList[i].date
                                             ? Colors.white

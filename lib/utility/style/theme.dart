@@ -53,69 +53,41 @@ class Themes {
   final blueTheme = ThemeData();
 }
 
-TextStyle title7 = TextStyle(
-  // fontFamily: 'Regular',
-  fontSize: 14,
-  color: Colors.grey[800],
-);
+TextStyle title7 = TextStyle(fontSize: 14, color: Colors.grey[800]);
 //appBarTitle
-TextStyle appBarTitleStyle = const TextStyle(
-  fontFamily: 'Poppins',
-  color: Colors.white,
-);
+TextStyle appBarTitleStyle = const TextStyle(color: Colors.white);
 
 //For state
-TextStyle stateTextStyle = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 13,
-  color: Colors.white,
-);
+TextStyle stateTextStyle = const TextStyle(fontSize: 13, color: Colors.white);
 
 //For Table
 TextStyle tableHeadingStyle = const TextStyle(
   fontSize: 14,
   color: Colors.black,
-  fontFamily: 'Poppins',
 );
 TextStyle tableHeadingStyle2 = const TextStyle(
   fontSize: 14,
   color: Colors.white,
-  fontFamily: 'Poppins',
 );
 
-TextStyle tableCellStyle = TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 13,
-  color: Colors.grey[700],
-);
+TextStyle tableCellStyle = TextStyle(fontSize: 13, color: Colors.grey[700]);
 
 //For list
 TextStyle listRow1TextStyle = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 15,
   color: Colors.black,
 );
 
-TextStyle listRow2TextStyle = TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 14,
-  color: Colors.grey[700],
-);
+TextStyle listRow2TextStyle = TextStyle(fontSize: 14, color: Colors.grey[700]);
 
-TextStyle listRow3TextStyle = TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 13,
-  color: Colors.grey[700],
-);
+TextStyle listRow3TextStyle = TextStyle(fontSize: 13, color: Colors.grey[700]);
 
 TextStyle listRow2TextStyleMainColor = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 14,
   color: ColorObj.mainColor,
 );
 
 TextStyle sectionHeaderTextStyle = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 16,
   color: Colors.black,
 );
@@ -200,159 +172,121 @@ TextStyle largeTextWithGrey600 = TextStyle(
 //normalText Grey
 
 TextStyle normalSmallGreyText = TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 13,
   color: Colors.grey[700],
 );
 
 TextStyle normalMediumGreyText = TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 14,
   color: Colors.grey[700],
 );
 
 TextStyle normalLargeGreyText = TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 15,
   color: Colors.grey[700],
 );
 
-TextStyle normalXLGreyText = TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 16,
-  color: Colors.grey[700],
-);
+TextStyle normalXLGreyText = TextStyle(fontSize: 16, color: Colors.grey[700]);
 
 TextStyle normalDoubleXLGreyText = TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 18,
   color: Colors.grey[700],
 );
 //normalText Black
 TextStyle normalSmallBalckText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 13,
   color: Colors.black,
 );
 
 TextStyle normalMediumBalckText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 14,
   color: Colors.black,
 );
 
 TextStyle normalLargeBalckText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 15,
   color: Colors.black,
 );
 
 TextStyle normalXLBalckText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 16,
   color: Colors.black,
 );
 
 TextStyle normalDoubleXLBalckText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 18,
   color: Colors.black,
 );
 
 //normalText White
 TextStyle normalSmallWhiteText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 13,
   color: Colors.white,
 );
 
 TextStyle normalMediumWhiteText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 14,
   color: Colors.white,
 );
 
 TextStyle normalLargeWhiteText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 15,
   color: Colors.white,
 );
 
 TextStyle normalXLWhiteText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 16,
   color: Colors.white,
 );
 
 TextStyle normalDoubleXLWhiteText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 18,
   color: Colors.white,
 );
 
 TextStyle normalDoubleXXLWhiteText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 22,
   color: Colors.white,
 );
 
 //normalText Red
-TextStyle normalSmallRedText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 13,
-  color: Colors.red,
-);
+TextStyle normalSmallRedText = const TextStyle(fontSize: 13, color: Colors.red);
 
 TextStyle normalMediumRedText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 14,
   color: Colors.red,
 );
-TextStyle normalLargeRedText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 15,
-  color: Colors.red,
-);
+TextStyle normalLargeRedText = const TextStyle(fontSize: 15, color: Colors.red);
 
-TextStyle normalXLRedText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 16,
-  color: Colors.red,
-);
+TextStyle normalXLRedText = const TextStyle(fontSize: 16, color: Colors.red);
 
 TextStyle normalDoubleXLRedText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 18,
   color: Colors.red,
 );
 
 //normalText Theme
 TextStyle normalSmallBlueText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 13,
   color: ColorObj.mainColor,
 );
 
 TextStyle normalMediumBlueText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 14,
   color: ColorObj.mainColor,
 );
 
 TextStyle normalLargeBlueText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 15,
   color: ColorObj.mainColor,
 );
 
 TextStyle normalXLBlueText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 16,
   color: ColorObj.mainColor,
 );
 
 TextStyle normalDoubleXLBlueText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 18,
   color: ColorObj.mainColor,
 );
@@ -360,158 +294,86 @@ TextStyle normalDoubleXLBlueText = const TextStyle(
 //BOLD
 //Blue
 TextStyle boldLargeBlueText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 15,
   color: ColorObj.mainColor,
 );
 
 TextStyle boldXLBlueText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 16,
   color: ColorObj.mainColor,
 );
 
 TextStyle boldXXLBlueText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 18,
   color: ColorObj.mainColor,
 );
 
 TextStyle boldXXXLBlueText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 20,
   color: ColorObj.mainColor,
 );
 
 TextStyle boldXXXXLWhiteText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 21,
   color: Colors.white,
 );
 
 //White
 TextStyle boldLargeWhiteText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 15,
   color: Colors.white,
 );
 
-TextStyle boldXLWhiteText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 16,
-  color: Colors.white,
-);
+TextStyle boldXLWhiteText = const TextStyle(fontSize: 16, color: Colors.white);
 
-TextStyle boldXXLWhiteText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 18,
-  color: Colors.white,
-);
+TextStyle boldXXLWhiteText = const TextStyle(fontSize: 18, color: Colors.white);
 
 TextStyle boldXXXLWhiteText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 20,
   color: Colors.white,
 );
 
 //Grey
-TextStyle boldLargeGreyText = TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 15,
-  color: Colors.grey[500],
-);
+TextStyle boldLargeGreyText = TextStyle(fontSize: 15, color: Colors.grey[500]);
 
-TextStyle boldXLGreyText = TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 16,
-  color: Colors.grey[500],
-);
+TextStyle boldXLGreyText = TextStyle(fontSize: 16, color: Colors.grey[500]);
 
-TextStyle boldXXLGreyText = TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 18,
-  color: Colors.grey[500],
-);
+TextStyle boldXXLGreyText = TextStyle(fontSize: 18, color: Colors.grey[500]);
 
-TextStyle boldXXXLGreyText = TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 20,
-  color: Colors.grey[500],
-);
+TextStyle boldXXXLGreyText = TextStyle(fontSize: 20, color: Colors.grey[500]);
 
 //Grey
 
-TextStyle boldMediumBlackText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 14,
-);
-TextStyle boldLargeBlackText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 15,
-);
+TextStyle boldMediumBlackText = const TextStyle(fontSize: 14);
+TextStyle boldLargeBlackText = const TextStyle(fontSize: 15);
 
-TextStyle boldXLBlackText = const TextStyle(fontFamily: 'Poppins', fontSize: 16);
+TextStyle boldXLBlackText = const TextStyle(fontSize: 16);
 
-TextStyle boldXXLBlackText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 18,
-);
+TextStyle boldXXLBlackText = const TextStyle(fontSize: 18);
 
-TextStyle boldXXXLBlackText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 20,
-);
+TextStyle boldXXXLBlackText = const TextStyle(fontSize: 20);
 
-TextStyle boldXXXXLBlackText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 22,
-);
+TextStyle boldXXXXLBlackText = const TextStyle(fontSize: 22);
 
 //Grey
-TextStyle boldLargeRedText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 15,
-  color: Colors.red,
-);
+TextStyle boldLargeRedText = const TextStyle(fontSize: 15, color: Colors.red);
 
-TextStyle boldXLRedText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 16,
-  color: Colors.red,
-);
+TextStyle boldXLRedText = const TextStyle(fontSize: 16, color: Colors.red);
 
-TextStyle boldXXLRedText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 18,
-  color: Colors.red,
-);
+TextStyle boldXXLRedText = const TextStyle(fontSize: 18, color: Colors.red);
 
-TextStyle boldXXXLRedText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 20,
-  color: Colors.red,
-);
+TextStyle boldXXXLRedText = const TextStyle(fontSize: 20, color: Colors.red);
 //Green
 TextStyle boldLargeGreenText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 15,
   color: Colors.green,
 );
 
-TextStyle boldXLGreenText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 16,
-  color: Colors.green,
-);
+TextStyle boldXLGreenText = const TextStyle(fontSize: 16, color: Colors.green);
 
-TextStyle boldXXLGreenText = const TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 18,
-  color: Colors.green,
-);
+TextStyle boldXXLGreenText = const TextStyle(fontSize: 18, color: Colors.green);
 
 TextStyle boldXXXLGreenText = const TextStyle(
-  fontFamily: 'Poppins',
   fontSize: 20,
   color: Colors.green,
 );

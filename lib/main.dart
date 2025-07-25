@@ -18,7 +18,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   sharePref = await SharedPreferences.getInstance();
-  deviceIMEI = '111'; //await PlatformDeviceId.getDeviceId();
+  deviceIMEI = '111';
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('ar')],

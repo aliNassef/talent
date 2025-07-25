@@ -196,8 +196,7 @@ class LeaveDetailScreenState extends State<LeaveDetailScreen> {
                                     child: Text(
                                       state.toString(),
                                       style: TextStyle(
-                                        fontFamily: 'Regular',
-                                        fontSize: 13,
+                                         fontSize: 13,
                                         color: textColor,
                                       ),
                                     ),

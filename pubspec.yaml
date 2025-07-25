@@ -121,6 +121,14 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    - family: DINNextLTArabic
+      fonts: 
+        - asset: assets/fonts/DINNextLTArabic-Bold-4.ttf 
+          weight: 700
+        - asset : assets/fonts/DINNextLTArabic-Regular-3.ttf
+          weight: 400 
+        - asset : assets/fonts/DINNextLTArabic-Medium-4.ttf
+          weight: 500
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Light.ttf
