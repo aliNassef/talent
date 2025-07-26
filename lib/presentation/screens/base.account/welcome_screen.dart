@@ -246,7 +246,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: const Image(
                   width: 70,
                   height: 70,
-                  image: AssetImage('assets/logos/ic_hrms.png'),
+                  image: AssetImage('assets/logos/Logo-Icon.png'),
                 ),
               ),
               JumpingDotsProgressIndicator(

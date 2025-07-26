@@ -206,7 +206,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppStrings.newExpense, style: appBarTitleStyle),
+          title: Text(AppStrings.newExpense.tr(), style: appBarTitleStyle),
           backgroundColor: ColorObj.mainColor,
           leading: InkWell(
             onTap: () {
@@ -244,7 +244,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                           selectedDate,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
-                             color: Color(0xff006ea5),
+                            color: Color(0xff006ea5),
                             fontSize: 16,
                           ),
                         ),
@@ -288,7 +288,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        AppStrings.description,
+                                        AppStrings.description.tr(),
                                         style: normalTextWithGrey700,
                                       ),
                                       const SizedBox(height: 8),
@@ -338,7 +338,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  AppStrings.expenseProduct,
+                                  AppStrings.expenseProduct.tr(),
                                   style: normalMediumGreyText,
                                 ),
                                 Container(
@@ -365,7 +365,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                                       ),
                                       isExpanded: true,
                                       hint: Text(
-                                        AppStrings.selectExpenseProduct,
+                                        AppStrings.selectExpenseProduct.tr(),
                                         style: normalMediumGreyText,
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -399,7 +399,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  AppStrings.expenseTax,
+                                  AppStrings.expenseTax.tr(),
                                   style: normalMediumGreyText,
                                 ),
                                 Container(
@@ -426,7 +426,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                                       ),
                                       isExpanded: true,
                                       hint: Text(
-                                        AppStrings.selectExpenseTax,
+                                        AppStrings.selectExpenseTax.tr(),
                                         style: normalMediumGreyText,
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -465,7 +465,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        AppStrings.billReference,
+                                        AppStrings.billReference.tr(),
                                         style: normalMediumGreyText,
                                       ),
                                       const SizedBox(height: 8),
@@ -518,7 +518,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        AppStrings.totalKs,
+                                        AppStrings.totalKs.tr(),
                                         style: normalMediumGreyText,
                                       ),
                                       const SizedBox(height: 8),
@@ -582,7 +582,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                                             top: 16,
                                           ),
                                           child: Text(
-                                            AppStrings.paidBy,
+                                            AppStrings.paidBy.tr(),
                                             style: normalMediumGreyText,
                                             textAlign: TextAlign.left,
                                           ),
@@ -603,8 +603,11 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                                               value: 0,
                                               groupValue: _groupValue,
                                               title: Text(
-                                                AppStrings.employeeToReimburse,
-                                                style: const TextStyle(fontSize: 14),
+                                                AppStrings.employeeToReimburse
+                                                    .tr(),
+                                                style: const TextStyle(
+                                                  fontSize: 14,
+                                                ),
                                               ),
                                               onChanged: (newValue) {
                                                 setState(() {
@@ -628,8 +631,10 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                                               value: 1,
                                               groupValue: _groupValue,
                                               title: Text(
-                                                AppStrings.company,
-                                                style: const TextStyle(fontSize: 14),
+                                                AppStrings.company.tr(),
+                                                style: const TextStyle(
+                                                  fontSize: 14,
+                                                ),
                                               ),
                                               onChanged: (newValue) {
                                                 log('onChanged---$newValue');
@@ -669,7 +674,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        AppStrings.note,
+                                        AppStrings.note.tr(),
                                         style: normalMediumGreyText,
                                       ),
                                       const SizedBox(height: 8),
@@ -733,7 +738,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                                 ),
                                 onPressed: _submitRequest,
                                 child: Text(
-                                  AppStrings.submitRequest,
+                                  AppStrings.submitRequest.tr(),
                                   style: normalLargeWhiteText,
                                 ),
                               ),
@@ -755,7 +760,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                                     ),
                                     const SizedBox(width: 10),
                                     Text(
-                                      AppStrings.attachment,
+                                      AppStrings.attachment.tr(),
                                       style: normalMediumGreyText,
                                     ),
                                   ],
@@ -790,7 +795,9 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
 
     if (descController.text == '') {
       toast!.showToast(
-        child: Widgets().getWarningToast(AppStrings.pleaseEnterDescription),
+        child: Widgets().getWarningToast(
+          AppStrings.pleaseEnterDescription.tr(),
+        ),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 2),
       );
@@ -799,7 +806,9 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
 
     if (selectedExpense == null) {
       toast!.showToast(
-        child: Widgets().getWarningToast(AppStrings.pleaseSelectExpenseProduct),
+        child: Widgets().getWarningToast(
+          AppStrings.pleaseSelectExpenseProduct.tr(),
+        ),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 2),
       );
@@ -808,14 +817,16 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
 
     if (totalAmountController.text == '') {
       toast!.showToast(
-        child: Widgets().getWarningToast(AppStrings.pleaseEnterTotalAmount),
+        child: Widgets().getWarningToast(
+          AppStrings.pleaseEnterTotalAmount.tr(),
+        ),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 2),
       );
       return;
     }
 
-    EasyLoading.show(status: AppStrings.submittingPleaseWait);
+    EasyLoading.show(status: AppStrings.submittingPleaseWait.tr());
 
     var amount = totalAmountController.text.toString().replaceAll(",", "");
     log('amount-------$amount');
@@ -858,7 +869,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
           EasyLoading.dismiss();
           toast!.showToast(
             child: Widgets().getErrorToast(
-              AppStrings.sessionExpiredPleaseLoginAgain,
+              AppStrings.sessionExpiredPleaseLoginAgain.tr(),
             ),
             gravity: ToastGravity.BOTTOM,
             toastDuration: const Duration(seconds: 3),
@@ -893,7 +904,9 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
     EasyLoading.dismiss();
 
     toast!.showToast(
-      child: Widgets().getSuccessToast(AppStrings.requestSuccessfullyCreated),
+      child: Widgets().getSuccessToast(
+        AppStrings.requestSuccessfullyCreated.tr(),
+      ),
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 2),
     );
@@ -904,7 +917,6 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
 
   @override
   void dispose() {
-  
     super.dispose();
   }
 
@@ -916,7 +928,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
         child: Column(
           children: [
             Text(
-              AppStrings.takeAttachmentPhoto,
+              AppStrings.takeAttachmentPhoto.tr(),
               textAlign: TextAlign.left,
               style: const TextStyle(fontSize: 20.0),
             ),
@@ -930,7 +942,10 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                     takephoto(ImageSource.camera);
                     Navigator.pop(context);
                   },
-                  label: Text(AppStrings.camera, style: smallTextWithPurple),
+                  label: Text(
+                    AppStrings.camera.tr(),
+                    style: smallTextWithPurple,
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     side: const BorderSide(color: ColorObj.mainColor, width: 1),
@@ -942,7 +957,10 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                     takephoto(ImageSource.camera);
                     Navigator.pop(context);
                   },
-                  label: Text(AppStrings.camera, style: smallTextWithPurple),
+                  label: Text(
+                    AppStrings.camera.tr(),
+                    style: smallTextWithPurple,
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     side: const BorderSide(color: ColorObj.mainColor, width: 1),
@@ -957,7 +975,10 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
   }
 
   takephoto(ImageSource source) async {
-    final pickedFile = await _picker.pickImage(imageQuality: 85, source: source);
+    final pickedFile = await _picker.pickImage(
+      imageQuality: 85,
+      source: source,
+    );
     setState(() {
       _imageFile = File(pickedFile!.path);
     });

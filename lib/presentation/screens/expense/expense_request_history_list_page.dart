@@ -10,6 +10,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:talent/data/database/dao/expense/expense_dao.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talent/utility/share/app_strings.dart';
+import 'package:talent/utility/share/isArabic.dart';
 import '../../../data/api/analytic_account_api.dart';
 import '../../../data/api/expense_api.dart';
 import '../../../data/api/expense_product_api.dart';
@@ -161,6 +162,8 @@ class _ExpenseListPageState extends State<ExpenseListPage> {
 
   @override
   Widget build(BuildContext context) {
+    log(isArabic(context).toString());
+    print(isArabic(context).toString());
     // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
@@ -198,7 +201,10 @@ class _ExpenseListPageState extends State<ExpenseListPage> {
             },
             child: const Icon(Icons.home),
           ),
-          title: Text(AppStrings.expenseHistoryList.tr(), style: appBarTitleStyle),
+          title: Text(
+            AppStrings.expenseHistoryList.tr(),
+            style: appBarTitleStyle,
+          ),
           backgroundColor: ColorObj.mainColor,
           actions: [
             IgnorePointer(
@@ -275,6 +281,9 @@ class _ExpenseListPageState extends State<ExpenseListPage> {
         floatingActionButton: SpeedDial(
           openCloseDial: isDialOpen,
           animatedIcon: AnimatedIcons.menu_close,
+          direction: isArabic(context)
+              ? SpeedDialDirection.right
+              : SpeedDialDirection.up,
           children: [
             SpeedDialChild(
               backgroundColor: ColorObj.mainColor,
@@ -282,7 +291,9 @@ class _ExpenseListPageState extends State<ExpenseListPage> {
               label: AppStrings.newExpense.tr(),
               onTap: () => Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const ExpenseEntryPage()),
+                MaterialPageRoute(
+                  builder: (context) => const ExpenseEntryPage(),
+                ),
               ),
             ),
             SpeedDialChild(
@@ -291,7 +302,9 @@ class _ExpenseListPageState extends State<ExpenseListPage> {
               label: AppStrings.expenseHistoryList.tr(),
               onTap: () => Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const ExpenseListPage()),
+                MaterialPageRoute(
+                  builder: (context) => const ExpenseListPage(),
+                ),
               ),
             ),
           ],
@@ -308,8 +321,10 @@ class _ExpenseListPageState extends State<ExpenseListPage> {
                   '${expenseList.length} ${AppStrings.recordsFound.tr()}',
                   style: normalMediumGreyText,
                 )
-              : Text(AppStrings.zeroRecordsFound.tr(),
-                  style: normalMediumGreyText),
+              : Text(
+                  AppStrings.zeroRecordsFound.tr(),
+                  style: normalMediumGreyText,
+                ),
         ),
       ),
     );
@@ -418,7 +433,10 @@ class ExpenseRequestCard extends StatelessWidget {
                     children: [
                       Text(
                         expenseType,
-                        style: const TextStyle(fontSize: 14, color: Colors.grey),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
                       ),
                       const SizedBox(width: 8),
                       Container(

@@ -227,7 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 80,
                     height: 80,
                     //  color: Style.ColorObj.loginBackgroundColor,
-                    image: AssetImage('assets/logos/ic_hrms.png'),
+                    image: AssetImage('assets/logos/Logo-Icon.png'),
                   ),
                 ),
                 const SizedBox(height: 20),

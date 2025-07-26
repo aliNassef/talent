@@ -24,7 +24,9 @@ class Root extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String fontFamily = context.locale.languageCode == 'ar' ? 'Cairo' : 'DINNextLTArabic';
+    String fontFamily = context.locale.languageCode == 'ar'
+        ? 'Cairo'
+        : 'DINNextLTArabic';
     return MaterialApp(
       key: ValueKey(context.locale),
       title: "SANID",

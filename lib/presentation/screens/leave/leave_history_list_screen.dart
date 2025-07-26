@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -16,6 +15,7 @@ import '../../../data/api/leave_api.dart';
 import '../../../data/database/dao/employee_dao.dart';
 import '../../../data/models/employee/employee.dart';
 import '../../../data/models/leave/leave.dart';
+import '../../../utility/share/isArabic.dart';
 import '../../../utility/style/theme.dart';
 import '../../widgets/custom_event_dialog.dart';
 // import '../../widgets/drawer_body.dart';
@@ -152,7 +152,10 @@ class LeaveHistoryListScreenState extends State<LeaveHistoryListScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: style.ColorObj.mainColor,
-          title: Text(AppStrings.myLeaveHistory.tr(), style: style.appBarTitleStyle),
+          title: Text(
+            AppStrings.myLeaveHistory.tr(),
+            style: style.appBarTitleStyle,
+          ),
           leading: InkWell(
             onTap: () {
               Navigator.pushReplacement(
@@ -256,11 +259,17 @@ class LeaveHistoryListScreenState extends State<LeaveHistoryListScreen> {
                   '${leaveList.length} ${AppStrings.recordsFound.tr()}',
                   style: normalMediumGreyText,
                 )
-              : Text(AppStrings.zeroRecordsFound.tr(), style: normalMediumGreyText),
+              : Text(
+                  AppStrings.zeroRecordsFound.tr(),
+                  style: normalMediumGreyText,
+                ),
         ),
         floatingActionButton: SpeedDial(
           animatedIcon: AnimatedIcons.menu_close,
           openCloseDial: isDialOpen,
+          direction: isArabic(context)
+              ? SpeedDialDirection.right
+              : SpeedDialDirection.up,
           children: [
             SpeedDialChild(
               backgroundColor: ColorObj.mainColor,
@@ -288,7 +297,8 @@ class LeaveRequestCard extends StatelessWidget {
   final String status;
   final Color statusColor;
 
-  const LeaveRequestCard({super.key, 
+  const LeaveRequestCard({
+    super.key,
     required this.date,
     required this.day,
     required this.reason,
