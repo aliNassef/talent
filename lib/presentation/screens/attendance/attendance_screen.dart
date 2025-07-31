@@ -290,7 +290,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
             },
             child: const Icon(Icons.home),
           ),
-          title: Text(AppStrings.attendance.tr(), style: appBarTitleStyle),
+          title: Text(AppStrings.attendanceCapital.tr(), style: appBarTitleStyle),
           backgroundColor: style.ColorObj.mainColor,
           actions: [
             Padding(
@@ -354,7 +354,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
                         showDialog(
                           // ignore: use_build_context_synchronously
                           context: context,
-                          builder: (_) => CustomEventDialog(),
+                          builder: (_) => const CustomEventDialog(),
                         );
                         return;
                       }

@@ -279,7 +279,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (checkInternet == false) {
       EasyLoading.dismiss();
       if (!mounted) return;
-      showDialog(context: context, builder: (_) => CustomEventDialog());
+      showDialog(context: context, builder: (_) => const CustomEventDialog());
       return;
     }
 
@@ -659,7 +659,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    DateFormat('EEEE MMMM d - yyyy, hh:mm a').format(DateTime.now()),
+                    DateFormat(
+                      'EEEE MMMM d - yyyy, hh:mm a',
+                    ).format(DateTime.now()),
                     style: const TextStyle(fontSize: 14),
                   ),
                   ValueListenableBuilder(
@@ -804,7 +806,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Container(
                                 margin: const EdgeInsets.only(left: 10),
                                 child: Text(
-                                  AppStrings.confirmation.tr()    ,
+                                  AppStrings.confirmation.tr(),
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
@@ -848,7 +850,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   top: 10,
                                 ),
                                 child: Text(
-                                  AppStrings.youAreGoingToExitTheApplication.tr(),
+                                  AppStrings.youAreGoingToExitTheApplication
+                                      .tr(),
                                   style: TextStyle(
                                     color: Colors.grey[800],
                                     fontSize: 15,
@@ -1041,7 +1044,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
-                  const Icon(Icons.notifications, color: Colors.white),
+                  const CircleAvatar(
+                    radius: 25,
+                    backgroundImage: AssetImage('assets/logos/Logo-Icon.png'),
+                  ),
                 ],
               ),
             ),
@@ -1172,7 +1178,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: Text(
                                         createPassword
                                             ? AppStrings.createPassword.tr()
-                                            : AppStrings.enterPasswordToAccess.tr(),
+                                            : AppStrings.enterPasswordToAccess
+                                                  .tr(),
                                         style: const TextStyle(fontSize: 18),
                                       ),
                                     ),
@@ -1292,8 +1299,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       color: Colors.grey,
                                                     ), //<-- SEE HERE
                                                   ),
-                                              hintText:
-                                                  AppStrings.confirmPassword.tr(),
+                                              hintText: AppStrings
+                                                  .confirmPassword
+                                                  .tr(),
                                               contentPadding:
                                                   const EdgeInsets.fromLTRB(
                                                     20.0,
@@ -1454,8 +1462,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               color: Colors.grey,
                                                                             ), //<-- SEE HERE
                                                                           ),
-                                                                          hintText:
-                                                                              AppStrings.currentPassword.tr(),
+                                                                          hintText: AppStrings
+                                                                              .currentPassword
+                                                                              .tr(),
                                                                           contentPadding: const EdgeInsets.fromLTRB(
                                                                             20.0,
                                                                             12.0,
@@ -1530,8 +1539,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               color: Colors.grey,
                                                                             ), //<-- SEE HERE
                                                                           ),
-                                                                          hintText:
-                                                                              AppStrings.newPassword.tr(),
+                                                                          hintText: AppStrings
+                                                                              .newPassword
+                                                                              .tr(),
                                                                           contentPadding: const EdgeInsets.fromLTRB(
                                                                             20.0,
                                                                             12.0,
@@ -1606,8 +1616,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               color: Colors.grey,
                                                                             ), //<-- SEE HERE
                                                                           ),
-                                                                          hintText:
-                                                                              AppStrings.confirmPassword.tr(),
+                                                                          hintText: AppStrings
+                                                                              .confirmPassword
+                                                                              .tr(),
                                                                           contentPadding: const EdgeInsets.fromLTRB(
                                                                             20.0,
                                                                             12.0,
@@ -1703,7 +1714,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                                     toast!.showToast(
                                                                                       child: Widgets().getSuccessToast(
                                                                                         AppStrings.passwordSuccessfullyChanged.tr(),
-                                                                                        ),
+                                                                                      ),
                                                                                     );
                                                                                   } else {
                                                                                     log(
@@ -1757,7 +1768,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             child: Text(
                                                                               AppStrings.ok.tr(),
                                                                               style: const TextStyle(
-                                                                                 fontSize: 16,
+                                                                                fontSize: 16,
                                                                                 color: ColorObj.mainColor,
                                                                               ),
                                                                             ),
@@ -1777,7 +1788,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   child: Text(
                                                     AppStrings.change.tr(),
                                                     style: TextStyle(
-                                                       fontSize: 16,
+                                                      fontSize: 16,
                                                       color:
                                                           ColorObj.greyColor7,
                                                     ),
@@ -1795,7 +1806,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 child: Text(
                                                   AppStrings.cancel.tr(),
                                                   style: const TextStyle(
-                                                     fontSize: 16,
+                                                    fontSize: 16,
                                                     color: Colors.red,
                                                   ),
                                                 ),
@@ -1823,7 +1834,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         child: Widgets()
                                                             .getWarningToast(
                                                               AppStrings
-                                                                  .passwordDoesNotMatch.tr(),
+                                                                  .passwordDoesNotMatch
+                                                                  .tr(),
                                                             ),
                                                         gravity:
                                                             ToastGravity.BOTTOM,
@@ -1866,7 +1878,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         child: Widgets()
                                                             .getWarningToast(
                                                               AppStrings
-                                                                  .invalidPassword.tr(),
+                                                                  .invalidPassword
+                                                                  .tr(),
                                                             ),
                                                         gravity:
                                                             ToastGravity.BOTTOM,
@@ -1885,7 +1898,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       ? AppStrings.create.tr()
                                                       : AppStrings.submit.tr(),
                                                   style: const TextStyle(
-                                                     fontSize: 16,
+                                                    fontSize: 16,
                                                     color: ColorObj.mainColor,
                                                   ),
                                                 ),
@@ -1955,13 +1968,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               GestureDetector(
                 onTap: () {},
-                child: _buildAttendanceItem(
-                  'assets/imgs/3.png',
-                  AppStrings.overtime.tr(),
-                  overtimeCount.toString(),
-                  const Color(0xff9999ff),
-                  45,
-                  45,
+                child: Container(
+                  margin: const EdgeInsets.all(4.0),
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(153, 153, 255, 1),
+                    borderRadius: BorderRadius.circular(12),
+                    image: const DecorationImage(
+                      image: AssetImage('assets/imgs/3.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
             ],

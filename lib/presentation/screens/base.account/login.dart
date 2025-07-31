@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
     bool checkInternet = await InternetConnectionChecker.instance.hasConnection;
     if (checkInternet == false) {
       // ignore: use_build_context_synchronously
-      showDialog(context: context, builder: (_) => CustomEventDialog());
+      showDialog(context: context, builder: (_) => const CustomEventDialog());
       return;
     }
 

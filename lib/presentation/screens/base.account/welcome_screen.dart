@@ -118,11 +118,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     log('checkInternet--------$checkInternet');
     if (checkInternet == false) {
       if (!mounted) return;
-      showDialog(context: context, builder: (_) => CustomEventDialog());
+      showDialog(context: context, builder: (_) => const CustomEventDialog());
       return;
     }
 
-    timer = Timer(const Duration(milliseconds: 1), () async {
+    timer = Timer(const Duration(milliseconds: 300), () async {
       String? token = pref.getString('jwt_token');
 
       waitingStage = pref.getString('waitingStage');
@@ -149,7 +149,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         } else {
           if (checkInternet == false) {
             if (!mounted) return;
-            showDialog(context: context, builder: (_) => CustomEventDialog());
+            showDialog(
+              context: context,
+              builder: (_) => const CustomEventDialog(),
+            );
             return;
           }
           checkDeviceActivation();
@@ -233,29 +236,27 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     _scaffoldCtx = context;
+
     return Scaffold(
-      body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: const Image(
-                  width: 70,
-                  height: 70,
-                  image: AssetImage('assets/logos/Logo-Icon.png'),
-                ),
-              ),
-              JumpingDotsProgressIndicator(
-                numberOfDots: 5,
-                fontSize: 150,
-                color: style.ColorObj.mainColor,
-              ),
-            ],
-          ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Image(
+              width: 70,
+              height: 70,
+              image: AssetImage('assets/logos/Logo-Icon.png'),
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(height: 20),
+            JumpingDotsProgressIndicator(
+              numberOfDots: 5,
+              fontSize: 40,
+              color: style.ColorObj.mainColor,
+            ),
+            const SizedBox(height: 50),
+          ],
         ),
       ),
     );

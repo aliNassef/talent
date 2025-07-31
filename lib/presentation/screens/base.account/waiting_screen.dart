@@ -178,7 +178,7 @@ class WaitingScreenState extends State<WaitingScreen> {
     bool checkInternet = await InternetConnectionChecker.instance.hasConnection;
     if (checkInternet == false) {
       if (!mounted) return;
-      showDialog(context: context, builder: (_) => CustomEventDialog());
+      showDialog(context: context, builder: (_) => const CustomEventDialog());
       return;
     }
     var pref = await SharedPreferences.getInstance();
@@ -270,7 +270,7 @@ class WaitingScreenState extends State<WaitingScreen> {
             ),
             JumpingDotsProgressIndicator(
               numberOfDots: 5,
-              fontSize: 200,
+              fontSize: 40,
               color: style.ColorObj.mainColor,
             ),
           ],
